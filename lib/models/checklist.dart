@@ -26,7 +26,7 @@ class Checklist {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'dataHorario': dataHorario.millisecondsSinceEpoch,
+      'dataHorario': dataHorario.millisecondsSinceEpoch / 1000 as int,
       'placa': placa,
     };
   }
@@ -34,7 +34,7 @@ class Checklist {
   factory Checklist.fromMap(Map<String, dynamic> map) {
     return Checklist(
       id: map['id'] as int,
-      dataHorario: DateTime.fromMillisecondsSinceEpoch(map['dataHorario'] as int),
+      dataHorario: DateTime.fromMillisecondsSinceEpoch(map['dataHorario'] * 1000 as int),
       placa: map['placa'] as String,
     );
   }

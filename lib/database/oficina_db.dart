@@ -23,6 +23,9 @@ class OficinaDB {
         placa TEXT PRIMARY KEY,
         modelo TEXT,
         cor TEXT,
+        marca TEXT,
+        ano INTEGER,
+        quilometragem INTEGER,
         motorista TEXT,
         proprietarioId INTEGER,
         FOREIGN KEY(proprietarioId) REFERENCES proprietario(id)

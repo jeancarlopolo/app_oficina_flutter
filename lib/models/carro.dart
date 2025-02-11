@@ -7,14 +7,20 @@ class Carro {
   String cor;
   int proprietarioId;
   String motorista;
+  int ano;
+  String marca;
+  int quilometragem;
   Carro({
     required this.placa,
     required this.modelo,
     required this.cor,
     required this.proprietarioId,
     required this.motorista,
+    required this.ano,
+    required this.marca,
+    required this.quilometragem,
   });
-  
+
 
   Carro copyWith({
     String? placa,
@@ -22,6 +28,9 @@ class Carro {
     String? cor,
     int? proprietarioId,
     String? motorista,
+    int? ano,
+    String? marca,
+    int? quilometragem,
   }) {
     return Carro(
       placa: placa ?? this.placa,
@@ -29,6 +38,9 @@ class Carro {
       cor: cor ?? this.cor,
       proprietarioId: proprietarioId ?? this.proprietarioId,
       motorista: motorista ?? this.motorista,
+      ano: ano ?? this.ano,
+      marca: marca ?? this.marca,
+      quilometragem: quilometragem ?? this.quilometragem,
     );
   }
 
@@ -39,6 +51,9 @@ class Carro {
       'cor': cor,
       'proprietarioId': proprietarioId,
       'motorista': motorista,
+      'ano': ano,
+      'marca': marca,
+      'quilometragem': quilometragem,
     };
   }
 
@@ -49,6 +64,9 @@ class Carro {
       cor: map['cor'] as String,
       proprietarioId: map['proprietarioId'] as int,
       motorista: map['motorista'] as String,
+      ano: map['ano'] as int,
+      marca: map['marca'] as String,
+      quilometragem: map['quilometragem'] as int,
     );
   }
 
@@ -58,7 +76,7 @@ class Carro {
 
   @override
   String toString() {
-    return 'Carro(placa: $placa, modelo: $modelo, cor: $cor, proprietarioId: $proprietarioId, motorista: $motorista)';
+    return 'Carro(placa: $placa, modelo: $modelo, cor: $cor, proprietarioId: $proprietarioId, motorista: $motorista, ano: $ano, marca: $marca, quilometragem: $quilometragem)';
   }
 
   @override
@@ -70,7 +88,10 @@ class Carro {
       other.modelo == modelo &&
       other.cor == cor &&
       other.proprietarioId == proprietarioId &&
-      other.motorista == motorista;
+      other.motorista == motorista &&
+      other.ano == ano &&
+      other.marca == marca &&
+      other.quilometragem == quilometragem;
   }
 
   @override
@@ -79,6 +100,9 @@ class Carro {
       modelo.hashCode ^
       cor.hashCode ^
       proprietarioId.hashCode ^
-      motorista.hashCode;
+      motorista.hashCode ^
+      ano.hashCode ^
+      marca.hashCode ^
+      quilometragem.hashCode;
   }
 }
