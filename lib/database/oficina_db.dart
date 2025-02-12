@@ -1,3 +1,5 @@
+import 'package:csv/csv.dart';
+import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -65,8 +67,62 @@ class OficinaDB {
       await db.execute('''
       CREATE INDEX idx_checklist_placa ON checklist(placa);
     ''');
-      
     });
+  }
+
+  Future<void> mock() async {
+    String proprietarioCsv = await rootBundle.loadString('mock/proprietario.csv');
+    List<List<dynamic>> proprietarios = const CsvToListConverter().convert(proprietarioCsv);
+    for (var proprietario in proprietarios) {
+      await inserirProprietario({
+        'id': proprietario[0],
+        'nome': proprietario[1],
+        'telefone': proprietario[2]
+      });
+    }
+    String carroCsv = await rootBundle.loadString('mock/carro.csv');
+    List<List<dynamic>> carros = const CsvToListConverter().convert(carroCsv);
+    for (var carro in carros) {
+      await inserirCarro({
+        'placa': carro[0],
+        'marca': carro[1],
+        'modelo': carro[2],
+        'cor': carro[3],
+        'ano': carro[4],
+        'quilometragem': carro[5],
+        'motorista': carro[6],
+        'proprietarioId': carro[7]
+      });
+    }
+    String itemCsv = await rootBundle.loadString('mock/item.csv');
+    List<List<dynamic>> itens = const CsvToListConverter().convert(itemCsv);
+    for (var item in itens) {
+      await inserirItem({
+        'id': item[0],
+        'nome': item[1]
+      });
+    }
+    String checklistCsv = await rootBundle.loadString('mock/checklist.csv');
+    List<List<dynamic>> checklists = const CsvToListConverter().convert(checklistCsv);
+    for (var checklist in checklists) {
+      await inserirChecklist({
+        'id': checklist[0],
+        'dataHorario': checklist[1],
+        'placa': checklist[2]
+      });
+    }
+    String checklistItemCsv = await rootBundle.loadString('mock/checklistItem.csv');
+    List<List<dynamic>> checklistItens = const CsvToListConverter().convert(checklistItemCsv);
+    for (var checklistItem in checklistItens) {
+      await inserirChecklistItem({
+        'checklistId': checklistItem[0],
+        'itemId': checklistItem[1],
+        'precisaReparo': checklistItem[2],
+        'precisaTrocar': checklistItem[3],
+        'observacao': checklistItem[4]
+      });
+    }
+    Logger().i('Mock inserido');
   }
 
   Future<void> inserirProprietario(Map<String, dynamic> proprietario) async {
@@ -90,7 +146,8 @@ class OficinaDB {
   }
 
   Future<void> inserirChecklistItem(Map<String, dynamic> checklistItem) async {
-    await _db.insert('checklistItem', checklistItem, conflictAlgorithm: ConflictAlgorithm.replace);
+    await _db.insert('checklistItem', checklistItem,
+        conflictAlgorithm: ConflictAlgorithm.replace);
     Logger().i(
         'ChecklistItem {${checklistItem['checklistId']}, ${checklistItem['itemId']}} inserido');
   }
