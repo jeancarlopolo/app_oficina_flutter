@@ -32,7 +32,7 @@ class OficinaDB {
         quilometragem INTEGER,
         motorista TEXT,
         proprietarioId INTEGER,
-        FOREIGN KEY(proprietarioId) REFERENCES proprietario(id)
+        FOREIGN KEY(proprietarioId) REFERENCES proprietario(id) ON DELETE CASCADE
       )
     ''');
       await db.execute('''
@@ -71,8 +71,10 @@ class OficinaDB {
   }
 
   Future<void> mock() async {
-    String proprietarioCsv = await rootBundle.loadString('mock/proprietario.csv');
-    List<List<dynamic>> proprietarios = const CsvToListConverter().convert(proprietarioCsv);
+    String proprietarioCsv =
+        await rootBundle.loadString('mock/proprietario.csv');
+    List<List<dynamic>> proprietarios =
+        const CsvToListConverter().convert(proprietarioCsv);
     for (var proprietario in proprietarios) {
       await inserirProprietario({
         'id': proprietario[0],
@@ -97,13 +99,11 @@ class OficinaDB {
     String itemCsv = await rootBundle.loadString('mock/item.csv');
     List<List<dynamic>> itens = const CsvToListConverter().convert(itemCsv);
     for (var item in itens) {
-      await inserirItem({
-        'id': item[0],
-        'nome': item[1]
-      });
+      await inserirItem({'id': item[0], 'nome': item[1]});
     }
     String checklistCsv = await rootBundle.loadString('mock/checklist.csv');
-    List<List<dynamic>> checklists = const CsvToListConverter().convert(checklistCsv);
+    List<List<dynamic>> checklists =
+        const CsvToListConverter().convert(checklistCsv);
     for (var checklist in checklists) {
       await inserirChecklist({
         'id': checklist[0],
@@ -111,8 +111,10 @@ class OficinaDB {
         'placa': checklist[2]
       });
     }
-    String checklistItemCsv = await rootBundle.loadString('mock/checklistItem.csv');
-    List<List<dynamic>> checklistItens = const CsvToListConverter().convert(checklistItemCsv);
+    String checklistItemCsv =
+        await rootBundle.loadString('mock/checklistItem.csv');
+    List<List<dynamic>> checklistItens =
+        const CsvToListConverter().convert(checklistItemCsv);
     for (var checklistItem in checklistItens) {
       await inserirChecklistItem({
         'checklistId': checklistItem[0],
@@ -152,22 +154,24 @@ class OficinaDB {
         'ChecklistItem {${checklistItem['checklistId']}, ${checklistItem['itemId']}} inserido');
   }
 
-  Future<List<Map<String, dynamic>>> buscarProprietarios() async {
+  Future<List<Map<String, dynamic>>> buscarProprietarios(int pageKey) async {
     return await _db.rawQuery('''
-      SELECT * FROM proprietario
+      SELECT * FROM proprietario LIMIT 10 OFFSET $pageKey
     ''');
   }
 
-  Future<List<Map<String, dynamic>>> buscarCarros(int proprietarioId) async {
+  Future<List<Map<String, dynamic>>> buscarCarros(
+      int proprietarioId, int pageKey) async {
     return await _db.rawQuery('''
-      SELECT * FROM carro WHERE proprietarioId = ?
-    ''', [proprietarioId]);
+      SELECT * FROM carro WHERE proprietarioId = $proprietarioId LIMIT 10 OFFSET $pageKey
+    ''');
   }
 
-  Future<List<Map<String, dynamic>>> buscarChecklists(String placa) async {
+  Future<List<Map<String, dynamic>>> buscarChecklists(
+      String placa, int pageKey) async {
     return await _db.rawQuery('''
-      SELECT * FROM checklist WHERE placa = ?
-    ''', [placa]);
+      SELECT * FROM checklist WHERE placa = '$placa' LIMIT 10 OFFSET $pageKey
+    ''');
   }
 
   Future<List<Map<String, dynamic>>> buscarItens() async {
@@ -178,9 +182,30 @@ class OficinaDB {
 
   Future<List<Map<String, dynamic>>> buscarChecklistItens(
       int checklistId) async {
-    return await _db.rawQuery('''
-      SELECT * FROM checklistItem WHERE checklistId = ?
+    // Insere os itens faltantes com valores padrão
+    await _db.execute(
+        '''INSERT INTO checklistItem (checklistId, itemId, precisaReparo, precisaTrocar, observacao)
+         SELECT ?, item.id, 0, 0, ''
+         FROM item
+         LEFT JOIN checklistItem 
+             ON item.id = checklistItem.itemId 
+             AND checklistItem.checklistId = ?
+         WHERE checklistItem.itemId IS NULL''',
+        [checklistId, checklistId]
+    );
+
+    // Retorna todos os itens do checklist
+    final result = await _db.rawQuery('''
+      SELECT item.id, item.nome, precisaReparo, precisaTrocar, observacao
+      FROM item
+      LEFT JOIN checklistItem
+          ON item.id = checklistItem.itemId
+          AND checklistItem.checklistId = ?
     ''', [checklistId]);
+
+    return result;
+    
+    
   }
 
   Future<void> atualizarProprietario(Map<String, dynamic> proprietario) async {
