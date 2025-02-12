@@ -1,0 +1,1001 @@
+checklistId,itemId,precisaReparo,precisaTrocar,observacao
+1,6,0,1,
+2,2,0,1,
+3,3,1,0,
+4,14,0,1,
+5,14,1,0,
+6,6,1,0,
+7,6,1,0,
+8,5,0,1,
+9,4,0,1,"Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem."
+10,13,0,1,
+11,12,1,0,
+12,11,1,0,Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.
+13,9,1,0,
+14,9,0,1,
+15,4,0,1,Proin interdum mauris non ligula pellentesque ultrices.
+16,5,0,1,"Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla."
+17,12,1,0,"Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc."
+18,14,1,0,Vestibulum sed magna at nunc commodo placerat. Praesent blandit.
+19,6,1,0,
+20,11,1,0,
+21,12,0,1,
+22,5,0,1,
+23,14,1,0,"Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci."
+24,12,1,0,"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam."
+25,3,1,0,Duis mattis egestas metus. Aenean fermentum.
+26,9,1,0,In quis justo. Maecenas rhoncus aliquam lacus.
+27,1,1,0,
+28,5,0,1,Etiam justo.
+29,6,0,1,
+30,11,0,1,
+31,3,0,1,
+32,1,1,0,Aliquam non mauris. Morbi non lectus.
+33,8,1,0,
+34,14,1,0,
+35,11,0,1,"Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci."
+36,8,1,0,
+37,13,1,0,
+38,10,0,1,
+39,10,1,0,Nulla ut erat id mauris vulputate elementum. Nullam varius.
+40,14,0,1,
+41,11,1,0,
+42,5,1,0,
+43,1,1,0,
+44,11,1,0,
+45,14,1,0,
+46,6,1,0,
+47,13,1,0,Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum.
+48,9,1,0,
+49,4,0,1,"Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh."
+50,10,1,0,
+51,9,0,1,Nullam molestie nibh in lectus. Pellentesque at nulla.
+52,3,1,0,
+53,4,1,0,
+54,12,0,1,
+55,12,0,1,
+56,3,1,0,
+57,2,1,0,
+58,2,0,1,
+59,1,1,0,"In est risus, auctor sed, tristique in, tempus sit amet, sem."
+60,8,1,0,"Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo."
+61,13,0,1,
+62,7,0,1,
+63,14,1,0,
+64,1,1,0,Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit.
+65,1,1,0,
+66,5,1,0,
+67,1,1,0,
+68,14,1,0,
+69,5,0,1,
+70,3,1,0,
+71,11,1,0,
+72,9,0,1,
+73,14,0,1,
+74,12,1,0,Phasellus in felis. Donec semper sapien a libero.
+75,10,1,0,Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus.
+76,3,1,0,"In est risus, auctor sed, tristique in, tempus sit amet, sem."
+77,2,1,0,
+78,4,1,0,
+79,12,1,0,Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.
+80,3,1,0,Nulla tempus.
+81,14,1,0,
+82,3,0,1,
+83,14,1,0,
+84,3,1,0,Aliquam erat volutpat.
+85,2,0,1,
+86,2,1,0,
+87,12,1,0,
+88,11,1,0,
+89,12,0,1,
+90,7,0,1,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+91,4,1,0,Proin interdum mauris non ligula pellentesque ultrices.
+92,9,1,0,
+93,11,1,0,
+94,12,1,0,
+95,6,0,1,Proin at turpis a pede posuere nonummy. Integer non velit.
+96,10,0,1,
+97,2,1,0,
+98,2,0,1,
+99,12,0,1,Duis mattis egestas metus. Aenean fermentum.
+100,4,0,1,
+101,12,0,1,Suspendisse accumsan tortor quis turpis. Sed ante.
+102,12,0,1,
+103,4,0,1,
+104,12,0,1,
+105,14,0,1,
+106,14,1,0,
+107,11,0,1,"Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat."
+108,6,1,0,
+109,6,1,0,
+110,2,1,0,
+111,5,0,1,
+112,1,0,1,
+113,11,1,0,
+114,9,0,1,
+115,5,1,0,
+116,4,0,1,
+117,13,1,0,Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue.
+118,13,0,1,
+119,10,1,0,
+120,8,0,1,
+121,7,0,1,
+122,2,1,0,
+123,8,0,1,
+124,12,0,1,Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.
+125,7,1,0,Pellentesque ultrices mattis odio.
+126,5,1,0,
+127,10,0,1,
+128,2,0,1,
+129,11,1,0,"Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl."
+130,8,1,0,Nullam sit amet turpis elementum ligula vehicula consequat.
+131,2,0,1,
+132,8,1,0,
+133,6,1,0,Donec semper sapien a libero.
+134,14,0,1,"Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis."
+135,11,0,1,
+136,8,1,0,
+137,3,1,0,
+138,2,1,0,
+139,4,1,0,
+140,12,0,1,
+141,8,1,0,
+142,8,0,1,Etiam vel augue.
+143,14,1,0,
+144,4,0,1,
+145,2,1,0,
+146,10,1,0,"Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus."
+147,3,0,1,
+148,12,0,1,
+149,12,1,0,
+150,3,0,1,
+151,9,1,0,
+152,5,1,0,
+153,12,1,0,
+154,10,1,0,Vivamus in felis eu sapien cursus vestibulum.
+155,5,0,1,Vivamus vel nulla eget eros elementum pellentesque.
+156,5,0,1,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus."
+157,4,0,1,Duis at velit eu est congue elementum.
+158,1,0,1,Aliquam non mauris.
+159,2,0,1,
+160,11,0,1,"Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis."
+161,4,0,1,
+162,12,0,1,
+163,3,1,0,
+164,13,1,0,
+165,12,0,1,
+166,13,0,1,
+167,9,0,1,
+168,13,0,1,
+169,14,0,1,"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa."
+170,13,0,1,Integer ac neque.
+171,6,1,0,Morbi non lectus.
+172,1,0,1,
+173,13,1,0,
+174,8,0,1,Nulla ut erat id mauris vulputate elementum. Nullam varius.
+175,8,0,1,"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+176,4,1,0,Nulla facilisi.
+177,1,0,1,
+178,3,1,0,Vestibulum rutrum rutrum neque.
+179,2,1,0,"Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci."
+180,8,0,1,
+181,8,1,0,
+182,5,0,1,
+183,2,0,1,
+184,12,0,1,
+185,10,0,1,Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.
+186,11,1,0,
+187,5,1,0,
+188,3,1,0,
+189,1,1,0,
+190,6,1,0,
+191,6,1,0,Suspendisse potenti. Cras in purus eu magna vulputate luctus.
+192,9,0,1,
+193,6,1,0,
+194,10,0,1,"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti."
+195,13,0,1,"Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede."
+196,9,0,1,
+197,3,0,1,
+198,1,0,1,
+199,2,0,1,
+200,10,0,1,
+201,12,1,0,
+202,4,0,1,
+203,13,0,1,"Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh."
+204,8,0,1,
+205,6,0,1,
+206,14,0,1,
+207,3,0,1,
+208,7,0,1,"Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+209,1,0,1,
+210,2,1,0,"In est risus, auctor sed, tristique in, tempus sit amet, sem."
+211,12,1,0,
+212,11,1,0,Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
+213,2,1,0,
+214,11,1,0,
+215,5,0,1,
+216,2,1,0,
+217,6,1,0,
+218,8,1,0,Integer ac neque. Duis bibendum.
+219,3,0,1,
+220,9,1,0,
+221,4,1,0,
+222,2,0,1,Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.
+223,11,0,1,
+224,5,0,1,
+225,5,0,1,"Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim."
+226,6,1,0,
+227,7,0,1,
+228,11,0,1,
+229,12,0,1,
+230,10,1,0,
+231,13,1,0,
+232,11,1,0,
+233,11,0,1,Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.
+234,13,0,1,
+235,6,1,0,
+236,4,0,1,
+237,14,1,0,
+238,13,0,1,
+239,3,1,0,"Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis."
+240,14,0,1,Pellentesque ultrices mattis odio.
+241,7,0,1,
+242,5,0,1,
+243,3,1,0,"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante."
+244,3,1,0,
+245,11,1,0,
+246,4,1,0,
+247,4,0,1,
+248,6,1,0,
+249,3,0,1,"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus."
+250,8,0,1,
+251,12,0,1,
+252,10,0,1,"Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo."
+253,10,0,1,
+254,4,1,0,"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros."
+255,9,0,1,
+256,13,0,1,Duis mattis egestas metus. Aenean fermentum.
+257,12,1,0,Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.
+258,7,0,1,Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.
+259,3,1,0,"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi."
+260,4,1,0,
+261,7,1,0,
+262,10,0,1,
+263,4,1,0,
+264,1,0,1,
+265,10,1,0,
+266,13,0,1,
+267,13,0,1,
+268,14,1,0,Aenean fermentum.
+269,3,1,0,
+270,10,1,0,
+271,14,1,0,
+272,7,0,1,
+273,8,1,0,Nulla justo.
+274,6,0,1,
+275,1,0,1,
+276,3,0,1,
+277,10,0,1,
+278,9,1,0,
+279,3,1,0,
+280,6,0,1,Mauris sit amet eros.
+281,8,0,1,
+282,6,1,0,
+283,6,0,1,
+284,5,1,0,"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl."
+285,7,1,0,
+286,1,0,1,
+287,11,1,0,
+288,14,1,0,Nunc rhoncus dui vel sem.
+289,2,0,1,Integer ac neque.
+290,2,0,1,
+291,12,0,1,
+292,2,1,0,
+293,10,0,1,
+294,8,0,1,
+295,6,0,1,
+296,11,0,1,Suspendisse potenti.
+297,9,1,0,
+298,9,1,0,Ut tellus. Nulla ut erat id mauris vulputate elementum.
+299,5,1,0,
+300,5,1,0,
+301,9,1,0,
+302,13,0,1,
+303,6,0,1,
+304,10,0,1,
+305,9,0,1,Quisque ut erat.
+306,5,0,1,
+307,12,0,1,
+308,9,0,1,
+309,2,0,1,
+310,2,0,1,Donec quis orci eget orci vehicula condimentum.
+311,2,1,0,"Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula."
+312,11,0,1,Pellentesque at nulla. Suspendisse potenti.
+313,9,1,0,"Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique."
+314,4,0,1,
+315,8,1,0,Duis aliquam convallis nunc.
+316,2,0,1,
+317,13,1,0,
+318,3,1,0,
+319,14,1,0,
+320,11,0,1,
+321,9,0,1,
+322,14,1,0,
+323,4,0,1,Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia.
+324,1,0,1,
+325,12,0,1,
+326,8,0,1,
+327,10,1,0,
+328,11,1,0,
+329,9,1,0,Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia.
+330,5,0,1,Morbi non quam nec dui luctus rutrum. Nulla tellus.
+331,12,0,1,
+332,4,1,0,Aenean lectus. Pellentesque eget nunc.
+333,14,1,0,Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet.
+334,6,0,1,
+335,10,0,1,"Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante."
+336,8,1,0,
+337,2,0,1,
+338,10,0,1,
+339,3,1,0,
+340,7,1,0,
+341,12,0,1,
+342,12,0,1,
+343,5,0,1,
+344,9,0,1,Etiam faucibus cursus urna.
+345,8,1,0,
+346,10,0,1,
+347,14,1,0,
+348,13,0,1,"Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante."
+349,12,1,0,Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.
+350,6,1,0,Integer ac neque.
+351,14,1,0,Nulla suscipit ligula in lacus.
+352,11,1,0,
+353,5,1,0,
+354,8,0,1,
+355,14,1,0,
+356,10,1,0,Donec ut mauris eget massa tempor convallis.
+357,4,1,0,
+358,7,0,1,Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat.
+359,3,1,0,Vivamus tortor. Duis mattis egestas metus.
+360,5,0,1,
+361,4,0,1,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo."
+362,8,0,1,Nulla tempus.
+363,3,1,0,Sed accumsan felis.
+364,9,0,1,
+365,11,1,0,
+366,6,1,0,
+367,2,1,0,"Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede."
+368,3,0,1,Suspendisse ornare consequat lectus.
+369,8,1,0,
+370,1,1,0,
+371,4,0,1,
+372,13,1,0,
+373,7,0,1,Aliquam quis turpis eget elit sodales scelerisque.
+374,9,1,0,In hac habitasse platea dictumst.
+375,6,0,1,Nunc purus.
+376,13,1,0,Praesent blandit.
+377,7,0,1,
+378,8,1,0,
+379,1,1,0,
+380,6,1,0,
+381,10,0,1,
+382,1,0,1,
+383,14,0,1,"Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl."
+384,2,0,1,
+385,5,0,1,
+386,8,0,1,
+387,8,0,1,Morbi a ipsum.
+388,11,0,1,
+389,5,1,0,
+390,2,1,0,Quisque ut erat. Curabitur gravida nisi at nibh.
+391,5,0,1,Nulla tellus. In sagittis dui vel nisl.
+392,5,0,1,
+393,9,1,0,
+394,14,1,0,
+395,6,0,1,
+396,11,0,1,
+397,4,1,0,
+398,4,0,1,"In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc."
+399,4,0,1,
+400,1,0,1,"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue."
+401,11,1,0,
+402,3,1,0,
+403,7,0,1,
+404,1,0,1,
+405,4,1,0,"Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc."
+406,2,1,0,
+407,9,0,1,
+408,6,0,1,
+409,13,0,1,In eleifend quam a odio.
+410,10,0,1,Fusce posuere felis sed lacus.
+411,8,0,1,
+412,10,1,0,
+413,8,0,1,
+414,1,0,1,Quisque ut erat. Curabitur gravida nisi at nibh.
+415,13,0,1,Morbi porttitor lorem id ligula.
+416,5,1,0,
+417,14,1,0,
+418,9,1,0,
+419,7,1,0,
+420,6,1,0,
+421,6,1,0,Suspendisse accumsan tortor quis turpis.
+422,13,0,1,
+423,2,0,1,
+424,9,1,0,
+425,14,1,0,
+426,3,1,0,
+427,9,1,0,Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus.
+428,7,1,0,
+429,11,0,1,
+430,4,1,0,
+431,12,0,1,
+432,10,1,0,
+433,13,0,1,"Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum."
+434,8,0,1,
+435,6,0,1,
+436,3,1,0,
+437,3,1,0,
+438,1,1,0,Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat.
+439,6,0,1,
+440,5,1,0,
+441,11,1,0,
+442,4,1,0,
+443,9,0,1,
+444,4,0,1,"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi."
+445,14,1,0,Integer tincidunt ante vel ipsum.
+446,6,0,1,"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa."
+447,5,0,1,"In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem."
+448,7,1,0,
+449,9,1,0,
+450,5,0,1,
+451,9,0,1,
+452,1,1,0,"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa."
+453,4,0,1,"Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis."
+454,10,1,0,"Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem."
+455,13,1,0,
+456,6,0,1,"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam."
+457,8,1,0,
+458,9,1,0,"Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam."
+459,9,1,0,
+460,5,0,1,
+461,2,1,0,
+462,10,1,0,
+463,10,0,1,"Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum."
+464,8,1,0,
+465,10,0,1,
+466,5,1,0,
+467,9,1,0,
+468,1,0,1,
+469,3,1,0,
+470,2,1,0,
+471,13,0,1,
+472,6,0,1,
+473,1,0,1,Pellentesque at nulla. Suspendisse potenti.
+474,1,0,1,
+475,13,1,0,"Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem."
+476,14,0,1,
+477,12,1,0,
+478,14,0,1,"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus."
+479,2,0,1,
+480,11,0,1,
+481,7,0,1,"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque."
+482,6,0,1,
+483,3,1,0,Morbi non quam nec dui luctus rutrum.
+484,4,0,1,
+485,14,1,0,
+486,4,1,0,Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
+487,1,1,0,
+488,3,1,0,
+489,7,0,1,
+490,8,1,0,
+491,11,0,1,Vivamus in felis eu sapien cursus vestibulum.
+492,7,1,0,Maecenas tincidunt lacus at velit.
+493,1,1,0,Duis consequat dui nec nisi volutpat eleifend.
+494,4,0,1,Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.
+495,14,0,1,Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.
+496,14,1,0,Suspendisse potenti. Nullam porttitor lacus at turpis.
+497,2,1,0,
+498,3,0,1,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices."
+499,10,0,1,
+500,11,1,0,
+501,5,1,0,
+502,2,1,0,
+503,9,1,0,
+504,2,1,0,
+505,7,1,0,Nullam varius. Nulla facilisi.
+506,9,1,0,
+507,14,1,0,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus."
+508,4,1,0,
+509,9,0,1,Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy.
+510,7,1,0,Vestibulum ac est lacinia nisi venenatis tristique.
+511,12,0,1,"In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+512,14,1,0,
+513,4,1,0,"Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam."
+514,14,1,0,
+515,4,0,1,Phasellus sit amet erat. Nulla tempus.
+516,12,0,1,
+517,5,0,1,"Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci."
+518,13,0,1,
+519,10,0,1,Duis mattis egestas metus. Aenean fermentum.
+520,6,1,0,
+521,10,0,1,Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat.
+522,9,0,1,Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.
+523,7,1,0,
+524,6,0,1,
+525,13,1,0,
+526,6,1,0,
+527,13,0,1,
+528,10,1,0,
+529,4,1,0,Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.
+530,11,1,0,
+531,12,0,1,
+532,14,1,0,Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.
+533,10,0,1,
+534,2,0,1,Duis ac nibh.
+535,12,1,0,
+536,13,0,1,Morbi quis tortor id nulla ultrices aliquet.
+537,4,1,0,Maecenas tincidunt lacus at velit.
+538,5,0,1,
+539,8,0,1,
+540,9,1,0,
+541,2,0,1,
+542,3,0,1,"Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis."
+543,11,1,0,
+544,5,0,1,
+545,6,1,0,
+546,11,0,1,
+547,3,0,1,
+548,3,1,0,Vivamus in felis eu sapien cursus vestibulum.
+549,7,1,0,Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.
+550,6,0,1,
+551,1,1,0,"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio."
+552,9,1,0,Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
+553,8,0,1,"Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam. Nam tristique tortor eu pede."
+554,5,1,0,
+555,3,0,1,
+556,1,1,0,"Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum."
+557,3,0,1,
+558,6,0,1,
+559,1,1,0,
+560,5,1,0,
+561,5,1,0,In congue. Etiam justo.
+562,6,0,1,
+563,13,1,0,Cras in purus eu magna vulputate luctus.
+564,4,0,1,
+565,1,0,1,
+566,7,1,0,
+567,10,1,0,
+568,9,0,1,
+569,9,0,1,
+570,8,1,0,
+571,8,0,1,
+572,6,0,1,
+573,1,0,1,
+574,3,0,1,"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus."
+575,4,0,1,
+576,13,0,1,
+577,9,1,0,Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat.
+578,6,0,1,Aliquam quis turpis eget elit sodales scelerisque.
+579,14,0,1,Etiam vel augue.
+580,6,1,0,
+581,10,1,0,
+582,13,1,0,
+583,13,1,0,"Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus."
+584,4,0,1,Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue.
+585,11,1,0,Nulla tellus. In sagittis dui vel nisl.
+586,4,0,1,
+587,3,0,1,Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.
+588,5,0,1,
+589,10,1,0,
+590,10,0,1,
+591,14,0,1,
+592,2,0,1,
+593,5,1,0,
+594,2,0,1,
+595,6,0,1,Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.
+596,8,0,1,Suspendisse potenti.
+597,8,0,1,In sagittis dui vel nisl.
+598,6,1,0,
+599,9,0,1,"In est risus, auctor sed, tristique in, tempus sit amet, sem."
+600,10,1,0,
+601,1,0,1,
+602,2,0,1,
+603,6,1,0,
+604,14,1,0,
+605,3,1,0,Morbi a ipsum.
+606,2,1,0,
+607,4,0,1,
+608,2,0,1,
+609,6,1,0,
+610,9,1,0,
+611,7,1,0,"Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci."
+612,10,1,0,
+613,11,0,1,
+614,7,0,1,
+615,1,1,0,
+616,6,0,1,Phasellus in felis. Donec semper sapien a libero.
+617,2,1,0,
+618,12,0,1,
+619,13,0,1,Phasellus sit amet erat.
+620,6,0,1,
+621,10,0,1,
+622,2,1,0,
+623,4,0,1,
+624,11,0,1,
+625,1,0,1,
+626,7,1,0,
+627,1,1,0,
+628,8,0,1,
+629,13,1,0,
+630,7,1,0,"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi."
+631,6,1,0,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+632,1,1,0,
+633,2,0,1,
+634,2,1,0,"Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue."
+635,6,1,0,"Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla."
+636,14,1,0,
+637,14,1,0,
+638,3,0,1,
+639,13,1,0,
+640,14,1,0,
+641,9,1,0,
+642,6,1,0,
+643,10,0,1,
+644,2,0,1,
+645,6,0,1,
+646,1,1,0,
+647,4,0,1,Pellentesque at nulla. Suspendisse potenti.
+648,14,0,1,
+649,14,1,0,Proin risus. Praesent lectus.
+650,5,0,1,Nulla ut erat id mauris vulputate elementum.
+651,2,0,1,
+652,9,1,0,
+653,4,1,0,"Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo."
+654,7,1,0,Aenean fermentum. Donec ut mauris eget massa tempor convallis.
+655,12,1,0,
+656,4,0,1,Integer ac leo.
+657,4,1,0,
+658,13,0,1,
+659,12,0,1,Sed sagittis.
+660,5,1,0,
+661,12,0,1,
+662,6,1,0,
+663,8,1,0,
+664,6,0,1,
+665,12,1,0,
+666,10,1,0,
+667,5,1,0,
+668,13,1,0,
+669,3,1,0,
+670,5,0,1,
+671,4,1,0,Curabitur at ipsum ac tellus semper interdum.
+672,1,0,1,Integer ac leo. Pellentesque ultrices mattis odio.
+673,13,0,1,
+674,2,0,1,
+675,14,0,1,
+676,9,0,1,
+677,7,0,1,
+678,3,0,1,
+679,3,1,0,
+680,5,1,0,Nunc nisl.
+681,8,0,1,
+682,4,1,0,
+683,8,1,0,
+684,5,0,1,In sagittis dui vel nisl. Duis ac nibh.
+685,6,1,0,Aenean lectus. Pellentesque eget nunc.
+686,2,0,1,
+687,13,0,1,
+688,13,1,0,
+689,10,1,0,
+690,8,1,0,"Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl."
+691,3,1,0,
+692,12,1,0,
+693,6,0,1,Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
+694,7,0,1,Aenean lectus. Pellentesque eget nunc.
+695,1,1,0,
+696,1,1,0,
+697,5,0,1,
+698,6,0,1,Aenean lectus. Pellentesque eget nunc.
+699,13,1,0,
+700,9,0,1,
+701,9,1,0,
+702,3,0,1,Nulla nisl. Nunc nisl.
+703,4,0,1,Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia.
+704,12,0,1,
+705,3,0,1,Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit.
+706,12,1,0,"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl."
+707,2,1,0,
+708,14,1,0,
+709,4,1,0,
+710,2,1,0,
+711,5,0,1,
+712,4,0,1,
+713,8,0,1,
+714,5,1,0,Etiam vel augue. Vestibulum rutrum rutrum neque.
+715,6,0,1,
+716,3,0,1,Duis at velit eu est congue elementum. In hac habitasse platea dictumst.
+717,14,1,0,
+718,6,1,0,
+719,12,1,0,
+720,8,0,1,
+721,4,1,0,
+722,11,0,1,"Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante."
+723,6,0,1,Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum.
+724,4,0,1,
+725,1,0,1,
+726,13,0,1,
+727,3,0,1,
+728,1,1,0,
+729,2,1,0,
+730,9,0,1,
+731,5,0,1,
+732,14,0,1,
+733,12,0,1,
+734,10,1,0,
+735,11,0,1,
+736,3,1,0,
+737,8,0,1,
+738,9,0,1,
+739,14,1,0,"Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus."
+740,1,0,1,"Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci."
+741,13,1,0,
+742,13,0,1,
+743,12,1,0,
+744,10,1,0,Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.
+745,10,1,0,"Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede."
+746,2,1,0,
+747,4,0,1,"Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis."
+748,11,1,0,
+749,14,1,0,"Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl."
+750,13,1,0,
+751,5,1,0,"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros."
+752,10,1,0,
+753,3,0,1,Etiam faucibus cursus urna. Ut tellus.
+754,5,1,0,Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.
+755,2,0,1,
+756,10,1,0,
+757,12,1,0,
+758,11,0,1,Aliquam quis turpis eget elit sodales scelerisque.
+759,8,0,1,Proin risus. Praesent lectus.
+760,8,0,1,
+761,8,0,1,
+762,12,1,0,In hac habitasse platea dictumst. Etiam faucibus cursus urna.
+763,11,1,0,
+764,7,0,1,
+765,7,0,1,
+766,9,1,0,
+767,10,1,0,
+768,12,1,0,
+769,14,0,1,
+770,10,1,0,
+771,11,0,1,
+772,8,1,0,
+773,3,0,1,Integer tincidunt ante vel ipsum.
+774,14,1,0,Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.
+775,8,0,1,In hac habitasse platea dictumst.
+776,3,0,1,Pellentesque ultrices mattis odio. Donec vitae nisi.
+777,6,0,1,
+778,10,1,0,
+779,8,1,0,
+780,14,0,1,
+781,1,0,1,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+782,11,1,0,Nunc rhoncus dui vel sem. Sed sagittis.
+783,4,0,1,
+784,8,1,0,"Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue."
+785,1,0,1,
+786,5,1,0,Vivamus tortor. Duis mattis egestas metus.
+787,14,1,0,
+788,10,0,1,
+789,12,0,1,Etiam justo. Etiam pretium iaculis justo.
+790,4,0,1,"Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede."
+791,8,0,1,
+792,10,1,0,
+793,10,0,1,
+794,5,0,1,
+795,9,0,1,
+796,5,0,1,
+797,2,0,1,
+798,7,1,0,
+799,3,0,1,
+800,10,0,1,
+801,1,0,1,"Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem."
+802,2,0,1,Maecenas pulvinar lobortis est.
+803,7,1,0,
+804,13,1,0,
+805,7,0,1,
+806,9,1,0,"Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+807,3,0,1,
+808,14,0,1,
+809,10,1,0,
+810,12,0,1,
+811,2,1,0,Vivamus tortor.
+812,11,0,1,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices."
+813,6,0,1,
+814,13,1,0,
+815,12,0,1,Mauris sit amet eros.
+816,13,1,0,Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.
+817,8,1,0,
+818,9,0,1,
+819,8,0,1,
+820,12,0,1,
+821,5,0,1,
+822,7,1,0,
+823,7,0,1,
+824,13,1,0,Nullam molestie nibh in lectus. Pellentesque at nulla.
+825,5,1,0,
+826,6,1,0,
+827,12,0,1,
+828,4,0,1,
+829,6,0,1,
+830,7,1,0,
+831,10,0,1,Quisque ut erat.
+832,12,0,1,
+833,7,1,0,"Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus."
+834,3,0,1,
+835,6,1,0,
+836,5,1,0,Cras in purus eu magna vulputate luctus.
+837,9,0,1,
+838,13,0,1,
+839,1,1,0,
+840,3,1,0,
+841,10,1,0,
+842,10,1,0,
+843,9,1,0,
+844,10,0,1,
+845,6,0,1,
+846,3,0,1,
+847,9,1,0,
+848,11,1,0,
+849,5,0,1,
+850,3,1,0,Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.
+851,6,0,1,Ut tellus.
+852,4,1,0,
+853,8,0,1,
+854,12,0,1,
+855,8,0,1,
+856,13,1,0,
+857,14,0,1,
+858,1,1,0,
+859,11,0,1,Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.
+860,5,0,1,
+861,4,0,1,
+862,11,0,1,
+863,11,0,1,
+864,1,0,1,
+865,9,1,0,
+866,7,1,0,"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam."
+867,3,0,1,
+868,8,1,0,
+869,2,1,0,
+870,3,0,1,Duis at velit eu est congue elementum. In hac habitasse platea dictumst.
+871,2,1,0,
+872,8,1,0,
+873,14,1,0,
+874,8,0,1,Curabitur at ipsum ac tellus semper interdum.
+875,9,1,0,Integer a nibh. In quis justo.
+876,8,1,0,
+877,4,1,0,Suspendisse potenti.
+878,7,0,1,
+879,6,0,1,Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
+880,14,0,1,
+881,5,0,1,Etiam vel augue. Vestibulum rutrum rutrum neque.
+882,12,0,1,
+883,12,1,0,
+884,5,1,0,
+885,10,0,1,Duis aliquam convallis nunc.
+886,9,0,1,
+887,5,1,0,In congue.
+888,13,1,0,"Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc."
+889,14,1,0,
+890,12,0,1,
+891,3,1,0,Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
+892,7,1,0,
+893,9,1,0,
+894,1,0,1,
+895,11,0,1,In congue.
+896,14,0,1,
+897,6,1,0,
+898,8,0,1,Nunc purus. Phasellus in felis.
+899,11,1,0,
+900,1,0,1,
+901,6,0,1,In eleifend quam a odio. In hac habitasse platea dictumst.
+902,7,1,0,
+903,6,1,0,Suspendisse potenti.
+904,7,0,1,
+905,8,1,0,
+906,2,1,0,Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
+907,1,1,0,
+908,3,1,0,Suspendisse potenti. In eleifend quam a odio.
+909,4,0,1,
+910,9,1,0,Etiam vel augue.
+911,8,0,1,
+912,4,0,1,
+913,2,0,1,
+914,1,0,1,
+915,8,1,0,
+916,10,1,0,
+917,3,0,1,
+918,7,1,0,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+919,4,0,1,
+920,13,0,1,
+921,8,1,0,
+922,7,1,0,
+923,11,0,1,Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum.
+924,9,0,1,
+925,7,0,1,
+926,13,0,1,
+927,3,1,0,
+928,2,0,1,
+929,1,1,0,
+930,12,0,1,
+931,7,1,0,
+932,4,1,0,
+933,11,1,0,
+934,14,1,0,Etiam pretium iaculis justo.
+935,1,1,0,
+936,14,1,0,
+937,10,1,0,In congue.
+938,10,1,0,
+939,9,1,0,Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
+940,7,0,1,In hac habitasse platea dictumst. Etiam faucibus cursus urna.
+941,8,1,0,Nulla mollis molestie lorem. Quisque ut erat.
+942,2,1,0,Nulla facilisi.
+943,4,0,1,
+944,5,0,1,
+945,8,1,0,Cras non velit nec nisi vulputate nonummy.
+946,8,1,0,
+947,14,0,1,
+948,4,0,1,
+949,13,0,1,Morbi non quam nec dui luctus rutrum.
+950,12,0,1,
+951,7,1,0,Nulla tempus.
+952,1,0,1,"Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo."
+953,5,1,0,
+954,13,0,1,Proin eu mi.
+955,3,1,0,
+956,6,0,1,
+957,8,1,0,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+958,8,0,1,
+959,3,1,0,
+960,1,0,1,
+961,1,0,1,
+962,9,1,0,Vestibulum sed magna at nunc commodo placerat. Praesent blandit.
+963,8,1,0,Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
+964,14,1,0,
+965,1,0,1,
+966,11,1,0,
+967,2,0,1,
+968,8,0,1,
+969,10,1,0,Morbi non quam nec dui luctus rutrum.
+970,14,0,1,
+971,10,1,0,Proin interdum mauris non ligula pellentesque ultrices.
+972,13,0,1,
+973,7,1,0,
+974,14,1,0,
+975,3,1,0,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices."
+976,6,0,1,Proin eu mi. Nulla ac enim.
+977,7,1,0,
+978,11,1,0,Duis mattis egestas metus.
+979,14,1,0,"Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo."
+980,12,1,0,Cras in purus eu magna vulputate luctus.
+981,13,1,0,"Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci."
+982,6,0,1,Proin eu mi. Nulla ac enim.
+983,5,0,1,
+984,14,1,0,Curabitur convallis.
+985,9,1,0,
+986,3,0,1,Etiam justo.
+987,5,1,0,Nulla facilisi.
+988,4,1,0,
+989,14,0,1,
+990,3,0,1,
+991,9,1,0,
+992,13,1,0,
+993,4,0,1,
+994,13,0,1,"Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue."
+995,7,0,1,
+996,4,1,0,
+997,2,1,0,
+998,14,0,1,
+999,4,1,0,Morbi ut odio.
+1000,7,1,0,

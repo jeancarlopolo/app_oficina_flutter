@@ -10,7 +10,9 @@ class OficinaDB {
 
   Future<void> init() async {
     _db = await openDatabase('oficina.db', version: 1,
-        onCreate: (Database db, int version) async {
+        onConfigure: (Database db) async {
+      await db.execute('PRAGMA foreign_keys = ON;');
+    }, onCreate: (Database db, int version) async {
       await db.execute('''
       CREATE TABLE proprietario (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,29 +36,36 @@ class OficinaDB {
       await db.execute('''
       CREATE TABLE checklist (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        dataHorario INTEGER,
+        dataHorario INTEGER, -- segundos desde 1970
         placa TEXT,
-        FOREIGN KEY(placa) REFERENCES carro(placa)
+        FOREIGN KEY(placa) REFERENCES carro(placa) ON DELETE CASCADE
       )
     ''');
       await db.execute('''
       CREATE TABLE item (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nome TEXT NOT NULL
+        nome TEXT NOT NULL UNIQUE
       )
     ''');
       await db.execute('''
       CREATE TABLE checklistItem (
         checklistId INTEGER,
         itemId INTEGER,
-        precisaReparo INTEGER,
-        precisaTrocar INTEGER,
+        precisaReparo INTEGER CHECK (precisaReparo IN (0, 1)),
+        precisaTrocar INTEGER CHECK (precisaTrocar IN (0, 1)),
         observacao TEXT,
-        FOREIGN KEY (checklistId) REFERENCES checklist (id),
+        FOREIGN KEY (checklistId) REFERENCES checklist (id) ON DELETE CASCADE,
         FOREIGN KEY (itemId) REFERENCES item (id),
         PRIMARY KEY (checklistId, itemId)
       )
     ''');
+      await db.execute('''
+      CREATE INDEX idx_carro_proprietarioId ON carro(proprietarioId);
+    ''');
+      await db.execute('''
+      CREATE INDEX idx_checklist_placa ON checklist(placa);
+    ''');
+      
     });
   }
 
@@ -81,7 +90,7 @@ class OficinaDB {
   }
 
   Future<void> inserirChecklistItem(Map<String, dynamic> checklistItem) async {
-    await _db.insert('checklistItem', checklistItem);
+    await _db.insert('checklistItem', checklistItem, conflictAlgorithm: ConflictAlgorithm.replace);
     Logger().i(
         'ChecklistItem {${checklistItem['checklistId']}, ${checklistItem['itemId']}} inserido');
   }
@@ -127,7 +136,13 @@ class OficinaDB {
   Future<void> atualizarCarro(Map<String, dynamic> carro) async {
     await _db.rawUpdate('''
       UPDATE carro SET modelo = ?, cor = ?, motorista = ?, proprietarioId = ? WHERE placa = ?
-    ''', [carro['modelo'], carro['cor'], carro['motorista'], carro['proprietarioId'], carro['placa']]);
+    ''', [
+      carro['modelo'],
+      carro['cor'],
+      carro['motorista'],
+      carro['proprietarioId'],
+      carro['placa']
+    ]);
     Logger().i('Carro {${carro['placa']}} atualizado');
   }
 
@@ -145,11 +160,19 @@ class OficinaDB {
     Logger().i('Item {${item['nome']}} atualizado');
   }
 
-  Future<void> atualizarChecklistItem(Map<String, dynamic> checklistItem) async {
+  Future<void> atualizarChecklistItem(
+      Map<String, dynamic> checklistItem) async {
     await _db.rawUpdate('''
       UPDATE checklistItem SET precisaReparo = ?, precisaTrocar = ?, observacao = ? WHERE checklistId = ? AND itemId = ?
-    ''', [checklistItem['precisaReparo'], checklistItem['precisaTrocar'], checklistItem['observacao'], checklistItem['checklistId'], checklistItem['itemId']]);
-    Logger().i('ChecklistItem {${checklistItem['checklistId']}, ${checklistItem['itemId']}} atualizado');
+    ''', [
+      checklistItem['precisaReparo'],
+      checklistItem['precisaTrocar'],
+      checklistItem['observacao'],
+      checklistItem['checklistId'],
+      checklistItem['itemId']
+    ]);
+    Logger().i(
+        'ChecklistItem {${checklistItem['checklistId']}, ${checklistItem['itemId']}} atualizado');
   }
 
   Future<void> apagarProprietario(int id) async {
@@ -184,7 +207,8 @@ class OficinaDB {
     await _db.rawDelete('''
       DELETE FROM checklistItem WHERE checklistId = ? AND itemId = ?
     ''', [checklistId, itemId]);
-    Logger().i('ChecklistItem {checklistId: $checklistId, itemId: $itemId} apagado');
+    Logger().i(
+        'ChecklistItem {checklistId: $checklistId, itemId: $itemId} apagado');
   }
 
   Future<String> relatorioCarrosMaisNecessitados() async {
@@ -196,9 +220,16 @@ class OficinaDB {
     SUM(CASE WHEN ci.precisaReparo = 1 OR ci.precisaTrocar = 1 THEN 1 ELSE 0 END) AS 'Quantidade de Problemas'
     FROM checklistItem ci
     INNER JOIN checklist ch ON ci.checklistId = ch.id
+    INNER JOIN (
+        -- Subconsulta para obter o checklist mais recente de cada carro
+        SELECT placa, MAX(dataHorario) AS ultimo_dataHorario
+        FROM checklist
+        GROUP BY placa
+    ) ultima_checklist ON ch.placa = ultima_checklist.placa AND ch.dataHorario = ultima_checklist.ultimo_dataHorario
     INNER JOIN carro c ON ch.placa = c.placa
     INNER JOIN proprietario p ON c.proprietarioId = p.id
     GROUP BY c.placa, p.nome
+    HAVING 'Quantidade de Problemas' > 0
     ORDER BY 'Quantidade de Problemas' DESC;
     ''');
     String relatorio = 'Carros mais necessitados:\n';
@@ -241,11 +272,17 @@ class OficinaDB {
     GROUP BY c.placa
     ORDER BY "Tempo Desde Última Checklist (segundos)" DESC;
     ''');
-    String relatorio = 'Carros que fazem mais tempo desde a última checklist:\n';
+    String relatorio =
+        'Carros que fazem mais tempo desde a última checklist:\n';
     for (var carro in carros) {
-      var dias = (carro['Tempo Desde Última Checklist (segundos)'] / 86400).floor();
-      var horas = ((carro['Tempo Desde Última Checklist (segundos)'] % 86400) / 3600).floor();
-      var minutos = ((carro['Tempo Desde Última Checklist (segundos)'] % 3600) / 60).floor();
+      var dias =
+          (carro['Tempo Desde Última Checklist (segundos)'] / 86400).floor();
+      var horas =
+          ((carro['Tempo Desde Última Checklist (segundos)'] % 86400) / 3600)
+              .floor();
+      var minutos =
+          ((carro['Tempo Desde Última Checklist (segundos)'] % 3600) / 60)
+              .floor();
       relatorio +=
           '${carro['Nome do Dono']} - ${carro['Placa do Carro']} - ${carro['Tempo Desde Última Checklist (segundos)']} segundos ($dias dias, $horas horas, $minutos minutos)\n';
     }
