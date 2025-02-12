@@ -39,6 +39,7 @@ dependencies:
   sqflite: ^2.4.1
   logger: ^2.5.0
   signals_flutter: ^6.0.2
+  flutter_downloader: ^1.12.0
 
 dev_dependencies:
   flutter_test:
