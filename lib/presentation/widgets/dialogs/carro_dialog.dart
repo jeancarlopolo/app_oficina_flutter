@@ -4,13 +4,11 @@ import 'package:oficina/models/carro.dart';
 class CarroDialog extends StatefulWidget {
   final Carro? carro;
   final int proprietarioId;
-  final String proprietarioNome;
 
   const CarroDialog({
     super.key,
     this.carro,
     required this.proprietarioId,
-    required this.proprietarioNome,
   });
 
   @override
@@ -34,7 +32,6 @@ class _CarroDialogState extends State<CarroDialog> {
     _placa = widget.carro?.placa ?? '';
     _modelo = widget.carro?.modelo ?? '';
     _cor = widget.carro?.cor ?? Cor.branca.nome;
-    _motorista = widget.carro?.motorista ?? widget.proprietarioNome;
     _marca = widget.carro?.marca ?? '';
     _ano = widget.carro?.ano ?? DateTime.now().year;
     _quilometragem = widget.carro?.quilometragem ?? 0;
@@ -123,16 +120,16 @@ class _CarroDialogState extends State<CarroDialog> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              final novoCarro = Carro(
-                placa: _placa,
-                modelo: _modelo,
-                cor: _cor,
-                proprietarioId: widget.proprietarioId,
-                motorista: _motorista,
-                ano: _ano,
-                marca: _marca,
-                quilometragem: _quilometragem,
-              );
+              final novoCarro = {
+                'placa': _placa,
+                'modelo': _modelo,
+                'cor': _cor,
+                'proprietarioId': widget.proprietarioId,
+                'motorista': _motorista,
+                'ano': _ano,
+                'marca': _marca,
+                'quilometragem': _quilometragem,
+              };
               Navigator.of(context).pop(novoCarro);
             }
           },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:oficina/database/oficina_db.dart';
 import 'package:oficina/models/carro.dart';
-import 'package:signals_flutter/signals_core.dart';
+import 'package:oficina/presentation/widgets/dialogs/carro_dialog.dart';
 
 class CarroCard extends StatelessWidget {
   CarroCard({super.key, required this.carro});
@@ -19,31 +19,45 @@ class CarroCard extends StatelessWidget {
         motion: const ScrollMotion(),
         children: <Widget>[
           SlidableAction(
-            onPressed: (context) {showDialog(context: context, builder: builder)}, // TODO editar_carro.dart
+            onPressed: (context) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return CarroDialog(
+                      carro: carro, proprietarioId: carro.proprietarioId);
+                },
+              ).then(
+                (novoCarro) {
+                  if (novoCarro != null) {
+                    OficinaDB.instance.atualizarCarro(novoCarro);
+                  }
+                },
+              );
+            },
             icon: Icons.edit,
             backgroundColor: Colors.blue,
           ),
           SlidableAction(
-            onPressed: (context) {OficinaDB.instance.apagarCarro(carro.placa);},
+            onPressed: (context) {
+              OficinaDB.instance.apagarCarro(carro.placa);
+            },
             icon: Icons.delete,
             backgroundColor: Colors.red,
           ),
         ],
       ),
-      
-      
-      
-      
-      
       child: ListTile(
         textColor: cor.textColor,
-        title: Container(decoration: cor.decoration, child: ListTile(
-          textColor: cor.textColor,
-          title: Text(carro.modelo),
-          subtitle: Text(carro.placa),
-          leading: Icon(Icons.directions_car, color: cor.textColor),
-        )),
+        title: Container(
+          decoration: cor.decoration,
+          child: ListTile(
+            textColor: cor.textColor,
+            title: Text(carro.modelo),
+            subtitle: Text(carro.placa),
+            leading: Icon(Icons.directions_car, color: cor.textColor),
+          ),
         ),
-      );
+      ),
+    );
   }
 }

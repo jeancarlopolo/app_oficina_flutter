@@ -65,10 +65,10 @@ class _ProprietarioDialogState extends State<ProprietarioDialog> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              final novoProprietario = Proprietario(
-                nome: _nome,
-                telefone: _telefone,
-              );
+              final novoProprietario = {
+                'nome': _nome,
+                'telefone': _telefone,
+              };
               Navigator.of(context).pop(novoProprietario);
             }
           },
