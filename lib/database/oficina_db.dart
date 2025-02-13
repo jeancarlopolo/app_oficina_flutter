@@ -138,7 +138,8 @@ class OficinaDB {
   }
 
   Future<void> inserirCarro(Map<String, dynamic> carro) async {
-    await _db.insert('carro', carro, conflictAlgorithm: ConflictAlgorithm.replace);
+    await _db.insert('carro', carro,
+        conflictAlgorithm: ConflictAlgorithm.replace);
     dataChanged.value++;
     Logger().i('Carro {${carro['placa']}} inserido');
   }
@@ -207,9 +208,7 @@ class OficinaDB {
          LEFT JOIN checklistItem 
              ON item.id = checklistItem.itemId 
              AND checklistItem.checklistId = ?
-         WHERE checklistItem.itemId IS NULL''',
-        [checklistId, checklistId]
-    );
+         WHERE checklistItem.itemId IS NULL''', [checklistId, checklistId]);
 
     // Retorna todos os itens do checklist
     final result = await _db.rawQuery('''
@@ -218,11 +217,10 @@ class OficinaDB {
       LEFT JOIN checklistItem
           ON item.id = checklistItem.itemId
           AND checklistItem.checklistId = ?
+          SORT BY item.id
     ''', [checklistId]);
 
     return result;
-    
-    
   }
 
   Future<void> atualizarProprietario(Map<String, dynamic> proprietario) async {

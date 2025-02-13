@@ -1,9 +1,15 @@
 import 'package:oficina/database/oficina_db.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:oficina/models/checklist.dart';
+import 'package:signals_flutter/signals_core.dart';
 
 class ChecklistController {
   final pagingController = PagingController<int, Checklist>(firstPageKey: 0);
+
+  late final dispose = effect(() {
+    OficinaDB.instance.dataChanged;
+    pagingController.refresh();
+  });
 
   Future<void> fetchChecklists(String placa, int pageKey) async {
     try {

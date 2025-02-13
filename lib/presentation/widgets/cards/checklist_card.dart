@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:oficina/database/oficina_db.dart';
 import 'package:oficina/models/checklist.dart';
+import 'package:oficina/presentation/pages/tela_itens.dart';
 
 class ChecklistCard extends StatelessWidget {
   const ChecklistCard({super.key, required this.checklist});
@@ -25,6 +26,11 @@ class ChecklistCard extends StatelessWidget {
           ],
         ),
         child: ListTile(
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TelaItens(checklistId: checklist.id!),
+            ),
+          ),
           title: Text(
               '${checklist.dataHorario.day}/${checklist.dataHorario.month}/${checklist.dataHorario.year}'),
         ));

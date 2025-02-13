@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:oficina/database/oficina_db.dart';
 import 'package:oficina/models/proprietario.dart';
+import 'package:oficina/presentation/pages/tela_carros.dart';
 import 'package:oficina/presentation/widgets/dialogs/proprietario_dialog.dart';
 
 class ProprietarioCard extends StatelessWidget {
@@ -45,6 +46,11 @@ class ProprietarioCard extends StatelessWidget {
         leading: const Icon(Icons.person),
         title: Text(proprietario.nome),
         subtitle: Text(proprietario.telefone),
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => TelaCarros(proprietarioId: proprietario.id!),
+          ),
+        ),
       ),
     );
   }

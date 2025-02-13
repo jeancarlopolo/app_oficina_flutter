@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:oficina/presentation/pages/tela_proprietarios.dart';
 
 class Aplicativo extends StatelessWidget {
   const Aplicativo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'App Oficina',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('App Oficina'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      home: TelaProprietarios(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

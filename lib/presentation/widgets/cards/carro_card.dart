@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:oficina/database/oficina_db.dart';
 import 'package:oficina/models/carro.dart';
+import 'package:oficina/presentation/pages/tela_checklists.dart';
 import 'package:oficina/presentation/widgets/dialogs/carro_dialog.dart';
 
 class CarroCard extends StatelessWidget {
@@ -48,6 +49,11 @@ class CarroCard extends StatelessWidget {
       ),
       child: ListTile(
         textColor: cor.textColor,
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => TelaChecklists(placa: carro.placa),
+          ),
+        ),
         title: Container(
           decoration: cor.decoration,
           child: ListTile(
