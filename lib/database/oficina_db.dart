@@ -1,6 +1,7 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
+import 'package:signals_flutter/signals_core.dart';
 import 'package:sqflite/sqflite.dart';
 
 class OficinaDB {
@@ -9,6 +10,8 @@ class OficinaDB {
   static final OficinaDB instance = OficinaDB._();
 
   late Database _db;
+
+  final dataChanged = signal(0);
 
   Future<void> init() async {
     _db = await openDatabase('oficina.db', version: 1,
@@ -129,27 +132,32 @@ class OficinaDB {
 
   Future<void> inserirProprietario(Map<String, dynamic> proprietario) async {
     await _db.insert('proprietario', proprietario);
+    dataChanged.value++;
     Logger().i('Proprietario {${proprietario['nome']}} inserido');
   }
 
   Future<void> inserirCarro(Map<String, dynamic> carro) async {
     await _db.insert('carro', carro);
+    dataChanged.value++;
     Logger().i('Carro {${carro['placa']}} inserido');
   }
 
   Future<void> inserirChecklist(Map<String, dynamic> checklist) async {
     await _db.insert('checklist', checklist);
+    dataChanged.value++;
     Logger().i('Checklist {${checklist['id']}} inserido');
   }
 
   Future<void> inserirItem(Map<String, dynamic> item) async {
     await _db.insert('item', item);
+    dataChanged.value++;
     Logger().i('Item {${item['nome']}} inserido');
   }
 
   Future<void> inserirChecklistItem(Map<String, dynamic> checklistItem) async {
     await _db.insert('checklistItem', checklistItem,
         conflictAlgorithm: ConflictAlgorithm.replace);
+    dataChanged.value++;
     Logger().i(
         'ChecklistItem {${checklistItem['checklistId']}, ${checklistItem['itemId']}} inserido');
   }
@@ -178,6 +186,13 @@ class OficinaDB {
     return await _db.rawQuery('''
       SELECT * FROM item
     ''');
+  }
+
+  Future<Map<String, dynamic>> buscarItem(int id) async {
+    final result = await _db.rawQuery('''
+      SELECT * FROM item WHERE id = ?
+    ''', [id]);
+    return result[0];
   }
 
   Future<List<Map<String, dynamic>>> buscarChecklistItens(
@@ -212,6 +227,7 @@ class OficinaDB {
     await _db.rawUpdate('''
       UPDATE proprietario SET nome = ?, telefone = ? WHERE id = ?
     ''', [proprietario['nome'], proprietario['telefone'], proprietario['id']]);
+    dataChanged.value++;
     Logger().i('Proprietario {${proprietario['nome']}} atualizado');
   }
 
@@ -225,6 +241,7 @@ class OficinaDB {
       carro['proprietarioId'],
       carro['placa']
     ]);
+    dataChanged.value++;
     Logger().i('Carro {${carro['placa']}} atualizado');
   }
 
@@ -232,6 +249,7 @@ class OficinaDB {
     await _db.rawUpdate('''
       UPDATE checklist SET dataHorario = ?, placa = ? WHERE id = ?
     ''', [checklist['dataHorario'], checklist['placa'], checklist['id']]);
+    dataChanged.value++;
     Logger().i('Checklist {${checklist['id']}} atualizado');
   }
 
@@ -239,6 +257,7 @@ class OficinaDB {
     await _db.rawUpdate('''
       UPDATE item SET nome = ? WHERE id = ?
     ''', [item['nome'], item['id']]);
+    dataChanged.value++;
     Logger().i('Item {${item['nome']}} atualizado');
   }
 
@@ -253,6 +272,7 @@ class OficinaDB {
       checklistItem['checklistId'],
       checklistItem['itemId']
     ]);
+    dataChanged.value++;
     Logger().i(
         'ChecklistItem {${checklistItem['checklistId']}, ${checklistItem['itemId']}} atualizado');
   }
@@ -261,6 +281,7 @@ class OficinaDB {
     await _db.rawDelete('''
       DELETE FROM proprietario WHERE id = ?
     ''', [id]);
+    dataChanged.value++;
     Logger().i('Proprietario {id: $id} apagado');
   }
 
@@ -268,6 +289,7 @@ class OficinaDB {
     await _db.rawDelete('''
       DELETE FROM carro WHERE placa = ?
     ''', [placa]);
+    dataChanged.value++;
     Logger().i('Carro {placa: $placa} apagado');
   }
 
@@ -275,6 +297,7 @@ class OficinaDB {
     await _db.rawDelete('''
       DELETE FROM checklist WHERE id = ?
     ''', [id]);
+    dataChanged.value++;
     Logger().i('Checklist {id: $id} apagado');
   }
 
@@ -282,6 +305,7 @@ class OficinaDB {
     await _db.rawDelete('''
       DELETE FROM item WHERE id = ?
     ''', [id]);
+    dataChanged.value++;
     Logger().i('Item {id: $id} apagado');
   }
 
@@ -289,6 +313,7 @@ class OficinaDB {
     await _db.rawDelete('''
       DELETE FROM checklistItem WHERE checklistId = ? AND itemId = ?
     ''', [checklistId, itemId]);
+    dataChanged.value++;
     Logger().i(
         'ChecklistItem {checklistId: $checklistId, itemId: $itemId} apagado');
   }
@@ -391,6 +416,7 @@ class OficinaDB {
     await _db.execute('''
       DELETE FROM checklistItem
     ''');
+    dataChanged.value++;
     Logger().i('Todos os checklistItens apagados');
   }
 }

@@ -67,6 +67,27 @@ enum Cor {
   final String nome;
 
   const Cor({required this.decoration, required this.nome});
+
+  static Cor getCor (String nome) {
+    for (final cor in Cor.values) {
+      if (cor.nome.toUpperCase() == nome.toUpperCase()) {
+        return cor;
+      }
+    }
+    return Cor.branca;
+  }
+
+  Color get textColor {
+    if (decoration.color != null) {
+      return decoration.color!.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+    } else {
+      final colors = (this as Gradient).colors;
+      final averageLuminance = colors
+          .map((color) => color.computeLuminance())
+          .reduce((a, b) => a + b) / colors.length;
+      return averageLuminance > 0.5 ? Colors.black : Colors.white;
+    }
+  }
 }
 
 class Carro {
