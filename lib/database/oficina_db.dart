@@ -393,7 +393,7 @@ class OficinaDB {
           ((carro['Tempo Desde Última Checklist (segundos)'] % 3600) / 60)
               .floor();
       relatorio +=
-          '${carro['Nome do Dono']} - ${carro['Placa do Carro']} - ${carro['Tempo Desde Última Checklist (segundos)']} segundos ($dias dias, $horas horas, $minutos minutos)\n';
+          '${carro['Nome do Dono']} - ${carro['Placa do Carro']} - $dias dias, $horas horas, $minutos minutos\n';
     }
     return relatorio;
   }
