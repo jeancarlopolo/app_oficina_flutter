@@ -1,6 +1,74 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
+enum Cor {
+  amarelo(decoration: BoxDecoration(color: Color(0xFFFFEB3B)), nome: 'Amarelo'),
+  azul(decoration: BoxDecoration(color: Color(0xFF2196F3)), nome: 'Azul'),
+  bege(decoration: BoxDecoration(color: Color(0xFFF5F5DC)), nome: 'Bege'),
+  branca(decoration: BoxDecoration(color: Color(0xFFFFFFFF)), nome: 'Branca'),
+  cinza(decoration: BoxDecoration(color: Color(0xFF9E9E9E)), nome: 'Cinza'),
+  dourada(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          Color(0xFFFFF176),
+          Color(0xFFFFD700),
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    ),
+    nome: 'Dourada',
+  ),
+  grena(decoration: BoxDecoration(color: Color(0xFF800000)), nome: 'Grená'),
+  laranja(decoration: BoxDecoration(color: Color(0xFFFF9800)), nome: 'Laranja'),
+  marrom(decoration: BoxDecoration(color: Color(0xFF795548)), nome: 'Marrom'),
+  prata(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          Color(0xFFE0E0E0),
+          Color(0xFFC0C0C0),
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    ),
+    nome: 'Prata',
+  ),
+  preta(decoration: BoxDecoration(color: Color(0xFF000000)), nome: 'Preta'),
+  rosa(decoration: BoxDecoration(color: Color(0xFFFFC0CB)), nome: 'Rosa'),
+  roxa(decoration: BoxDecoration(color: Color(0xFF9C27B0)), nome: 'Roxa'),
+  verde(decoration: BoxDecoration(color: Color(0xFF4CAF50)), nome: 'Verde'),
+  vermelha(
+      decoration: BoxDecoration(color: Color(0xFFF44336)), nome: 'Vermelha'),
+  fantasia(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          Colors.red,
+          Colors.orange,
+          Colors.yellow,
+          Colors.green,
+          Colors.blue,
+          Colors.indigo,
+          Colors.purple,
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    ),
+    nome: 'Fantasia',
+  );
+
+  final BoxDecoration decoration;
+  final String nome;
+
+  const Cor({required this.decoration, required this.nome});
+}
+
 class Carro {
   String placa;
   String modelo;
@@ -20,7 +88,6 @@ class Carro {
     required this.marca,
     required this.quilometragem,
   });
-
 
   Carro copyWith({
     String? placa,
@@ -72,7 +139,8 @@ class Carro {
 
   String toJson() => json.encode(toMap());
 
-  factory Carro.fromJson(String source) => Carro.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Carro.fromJson(String source) =>
+      Carro.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -82,27 +150,26 @@ class Carro {
   @override
   bool operator ==(covariant Carro other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.placa == placa &&
-      other.modelo == modelo &&
-      other.cor == cor &&
-      other.proprietarioId == proprietarioId &&
-      other.motorista == motorista &&
-      other.ano == ano &&
-      other.marca == marca &&
-      other.quilometragem == quilometragem;
+
+    return other.placa == placa &&
+        other.modelo == modelo &&
+        other.cor == cor &&
+        other.proprietarioId == proprietarioId &&
+        other.motorista == motorista &&
+        other.ano == ano &&
+        other.marca == marca &&
+        other.quilometragem == quilometragem;
   }
 
   @override
   int get hashCode {
     return placa.hashCode ^
-      modelo.hashCode ^
-      cor.hashCode ^
-      proprietarioId.hashCode ^
-      motorista.hashCode ^
-      ano.hashCode ^
-      marca.hashCode ^
-      quilometragem.hashCode;
+        modelo.hashCode ^
+        cor.hashCode ^
+        proprietarioId.hashCode ^
+        motorista.hashCode ^
+        ano.hashCode ^
+        marca.hashCode ^
+        quilometragem.hashCode;
   }
 }
