@@ -2,11 +2,11 @@
 import 'dart:convert';
 
 class Proprietario {
-  int id;
+  int? id;
   String nome;
   String telefone;
   Proprietario({
-    required this.id,
+    this.id,
     required this.nome,
     required this.telefone,
   });
@@ -34,7 +34,7 @@ class Proprietario {
 
   factory Proprietario.fromMap(Map<String, dynamic> map) {
     return Proprietario(
-      id: map['id'] as int,
+      id: map['id'] != null ? map['id'] as int : null,
       nome: map['nome'] as String,
       telefone: map['telefone'] as String,
     );

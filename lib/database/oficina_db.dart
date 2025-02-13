@@ -130,22 +130,24 @@ class OficinaDB {
     Logger().i('Mock inserido');
   }
 
-  Future<void> inserirProprietario(Map<String, dynamic> proprietario) async {
-    await _db.insert('proprietario', proprietario);
+  Future<int> inserirProprietario(Map<String, dynamic> proprietario) async {
+    final id = await _db.insert('proprietario', proprietario);
     dataChanged.value++;
     Logger().i('Proprietario {${proprietario['nome']}} inserido');
+    return id;
   }
 
   Future<void> inserirCarro(Map<String, dynamic> carro) async {
-    await _db.insert('carro', carro);
+    await _db.insert('carro', carro, conflictAlgorithm: ConflictAlgorithm.replace);
     dataChanged.value++;
     Logger().i('Carro {${carro['placa']}} inserido');
   }
 
-  Future<void> inserirChecklist(Map<String, dynamic> checklist) async {
-    await _db.insert('checklist', checklist);
+  Future<int> inserirChecklist(Map<String, dynamic> checklist) async {
+    final id = await _db.insert('checklist', checklist);
     dataChanged.value++;
     Logger().i('Checklist {${checklist['id']}} inserido');
+    return id;
   }
 
   Future<void> inserirItem(Map<String, dynamic> item) async {

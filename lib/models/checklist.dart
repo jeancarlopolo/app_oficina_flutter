@@ -2,14 +2,15 @@
 import 'dart:convert';
 
 class Checklist {
-  int id;
+  int? id;
   DateTime dataHorario;
   String placa;
   Checklist({
-    required this.id,
+    this.id,
     required this.dataHorario,
     required this.placa,
   });
+
 
   Checklist copyWith({
     int? id,
@@ -26,14 +27,14 @@ class Checklist {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'dataHorario': dataHorario.millisecondsSinceEpoch / 1000 as int,
+      'dataHorario': dataHorario.millisecondsSinceEpoch / 1000,
       'placa': placa,
     };
   }
 
   factory Checklist.fromMap(Map<String, dynamic> map) {
     return Checklist(
-      id: map['id'] as int,
+      id: map['id'] != null ? map['id'] as int : null,
       dataHorario: DateTime.fromMillisecondsSinceEpoch(map['dataHorario'] * 1000 as int),
       placa: map['placa'] as String,
     );
