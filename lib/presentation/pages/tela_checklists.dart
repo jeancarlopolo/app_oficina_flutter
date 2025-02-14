@@ -39,9 +39,9 @@ class _TelaChecklistsState extends State<TelaChecklists> {
       }, child: const Icon(Icons.add)),
       body: PagedListView(
         pagingController: _checklistController.pagingController,
-        builderDelegate: PagedChildBuilderDelegate<Checklist>(
+        builderDelegate: PagedChildBuilderDelegate<Map<String,dynamic>>(
           itemBuilder: (context, checklist, index) {
-            return ChecklistCard(checklist: checklist);
+            return ChecklistCard(checklist: Checklist.fromMap(checklist));
           },
         ),
       ),

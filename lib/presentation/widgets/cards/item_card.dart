@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:oficina/database/oficina_db.dart';
 import 'package:oficina/models/checklist_item.dart';
-import 'package:signals_flutter/signals_core.dart';
 import 'package:signals_flutter/signals_flutter.dart';
 
 class ItemCard extends StatefulWidget {

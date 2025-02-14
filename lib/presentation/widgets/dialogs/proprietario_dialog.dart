@@ -65,10 +65,11 @@ class _ProprietarioDialogState extends State<ProprietarioDialog> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              final novoProprietario = {
-                'nome': _nome,
-                'telefone': _telefone,
-              };
+              final novoProprietario = Proprietario(
+                id: widget.proprietario?.id,
+                nome: _nome,
+                telefone: _telefone,
+              );
               Navigator.of(context).pop(novoProprietario);
             }
           },

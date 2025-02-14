@@ -80,7 +80,6 @@ class OficinaDB {
         const CsvToListConverter().convert(proprietarioCsv);
     for (var proprietario in proprietarios) {
       await inserirProprietario({
-        'id': proprietario[0],
         'nome': proprietario[1],
         'telefone': proprietario[2]
       });
@@ -102,14 +101,13 @@ class OficinaDB {
     String itemCsv = await rootBundle.loadString('mock/item.csv');
     List<List<dynamic>> itens = const CsvToListConverter().convert(itemCsv);
     for (var item in itens) {
-      await inserirItem({'id': item[0], 'nome': item[1]});
+      await inserirItem({'nome': item[1]});
     }
     String checklistCsv = await rootBundle.loadString('mock/checklist.csv');
     List<List<dynamic>> checklists =
         const CsvToListConverter().convert(checklistCsv);
     for (var checklist in checklists) {
       await inserirChecklist({
-        'id': checklist[0],
         'dataHorario': checklist[1],
         'placa': checklist[2]
       });

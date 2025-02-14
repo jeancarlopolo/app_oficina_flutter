@@ -120,16 +120,16 @@ class _CarroDialogState extends State<CarroDialog> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              final novoCarro = {
-                'placa': _placa,
-                'modelo': _modelo,
-                'cor': _cor,
-                'proprietarioId': widget.proprietarioId,
-                'motorista': _motorista,
-                'ano': _ano,
-                'marca': _marca,
-                'quilometragem': _quilometragem,
-              };
+              final novoCarro = Carro(
+                placa: _placa,
+                modelo: _modelo,
+                cor: _cor,
+                motorista: _motorista,
+                marca: _marca,
+                ano: _ano,
+                quilometragem: _quilometragem,
+                proprietarioId: widget.proprietarioId,
+              );
               Navigator.of(context).pop(novoCarro);
             }
           },

@@ -58,9 +58,9 @@ class _TelaProprietariosState extends State<TelaProprietarios> {
           child: const Icon(Icons.add)),
       body: PagedListView(
           pagingController: _proprietarioController.pagingController,
-          builderDelegate: PagedChildBuilderDelegate<Proprietario>(
+          builderDelegate: PagedChildBuilderDelegate<Map<String,dynamic>>(
             itemBuilder: (context, item, index) =>
-                ProprietarioCard(proprietario: item),
+                ProprietarioCard(proprietario: Proprietario.fromMap(item)),
           )),
     );
   }

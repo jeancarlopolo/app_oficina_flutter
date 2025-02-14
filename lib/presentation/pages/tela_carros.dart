@@ -50,9 +50,9 @@ class _TelaCarrosState extends State<TelaCarros> {
       ),
       body: PagedListView(
         pagingController: _carroController.pagingController,
-        builderDelegate: PagedChildBuilderDelegate<Carro>(
+        builderDelegate: PagedChildBuilderDelegate<Map<String,dynamic>>(
           itemBuilder: (context, carro, index) {
-            return CarroCard(carro: carro);
+            return CarroCard(carro: Carro.fromMap(carro));
           },
         ),
       ),

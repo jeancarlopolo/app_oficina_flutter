@@ -34,9 +34,9 @@ class _TelaItensState extends State<TelaItens> {
       ),
       body: PagedListView(
         pagingController: _itemController.pagingController,
-        builderDelegate: PagedChildBuilderDelegate<ChecklistItem>(
+        builderDelegate: PagedChildBuilderDelegate<Map<String,dynamic>>(
           itemBuilder: (context, item, index) {
-            return ItemCard(checklistItem: item);
+            return ItemCard(checklistItem: ChecklistItem.fromMap(item));
           },
         ),
       ),

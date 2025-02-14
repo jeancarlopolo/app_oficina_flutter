@@ -10,11 +10,5 @@ void main() async {
 
 Future<void> setup() async {
   await OficinaDB.instance.init();
-  //OficinaDB.instance.apagarTudo();
-  
-  bool mock = true; // pra inserir dados de teste
-  if (mock) {
-    OficinaDB.instance.mock();
-  }
 }
 
