@@ -21,8 +21,8 @@ class ConfigDialog extends StatelessWidget {
               // OficinaDB.instance.relatorioProprietariosMaisCarros() retorna uma string
               final path = await getApplicationDocumentsDirectory()
                 ..path;
-              final file =
-                  await File('$path/relatorio_mais_carros.txt').create();
+              final file = File('$path/relatorio_mais_carros.txt');
+              await file.create(recursive: true);
               await file.writeAsString(
                 await OficinaDB.instance.relatorioProprietariosMaisCarros(),
               );
@@ -37,8 +37,9 @@ class ConfigDialog extends StatelessWidget {
               final path = await getApplicationDocumentsDirectory()
                 ..path;
               final file =
-                  await File('$path/relatorio_carros_com_mais_problemas.txt')
-                      .create();
+                  File('$path/relatorio_carros_com_mais_problemas.txt');
+              await file.create(recursive: true);
+
               await file.writeAsString(
                 await OficinaDB.instance.relatorioCarrosMaisNecessitados(),
               );
@@ -53,9 +54,8 @@ class ConfigDialog extends StatelessWidget {
               // OficinaDB.instance.relatorioCarrosQueFazemMaisTempoDesdeAUltimaChecklist() retorna uma string
               final path = await getApplicationDocumentsDirectory()
                 ..path;
-              final file =
-                  await File('$path/relatorio_carros_desatualizados.txt')
-                      .create();
+              final file = File('$path/relatorio_carros_desatualizados.txt');
+              await file.create(recursive: true);
               await file.writeAsString(
                 await OficinaDB.instance
                     .relatorioCarrosQueFazemMaisTempoDesdeAUltimaChecklist(),

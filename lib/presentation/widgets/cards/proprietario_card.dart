@@ -12,43 +12,51 @@ class ProprietarioCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      key: const ValueKey(0),
-      endActionPane: ActionPane(
-        motion: const ScrollMotion(),
-        children: <Widget>[
-          SlidableAction(
-            onPressed: (context) {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return ProprietarioDialog(proprietario: proprietario);
-                },
-              ).then((novoProprietario) {
-                if (novoProprietario != null) {
-                  OficinaDB.instance.atualizarProprietario(novoProprietario);
-                }
-              });
-            },
-            icon: Icons.edit,
-            backgroundColor: Colors.blue,
-          ),
-          SlidableAction(
-            onPressed: (context) {
-              OficinaDB.instance.apagarProprietario(proprietario.id!);
-            },
-            icon: Icons.delete,
-            backgroundColor: Colors.red,
-          ),
-        ],
+    return Container(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
       ),
-      child: ListTile(
-        leading: const Icon(Icons.person),
-        title: Text(proprietario.nome),
-        subtitle: Text(proprietario.telefone),
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => TelaCarros(proprietarioId: proprietario.id!),
+      child: Slidable(
+        key: const ValueKey(0),
+        endActionPane: ActionPane(
+          motion: const ScrollMotion(),
+          children: <Widget>[
+            SlidableAction(
+              onPressed: (context) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return ProprietarioDialog(proprietario: proprietario);
+                  },
+                ).then((novoProprietario) {
+                  if (novoProprietario != null) {
+                    OficinaDB.instance.atualizarProprietario(novoProprietario);
+                  }
+                });
+              },
+              icon: Icons.edit,
+              backgroundColor: Colors.blue,
+            ),
+            SlidableAction(
+              onPressed: (context) {
+                OficinaDB.instance.apagarProprietario(proprietario.id!);
+              },
+              icon: Icons.delete,
+              backgroundColor: Colors.red,
+            ),
+          ],
+        ),
+        child: ListTile(
+          leading: const Icon(Icons.person),
+          title: Text(proprietario.nome),
+          subtitle: Text(proprietario.telefone),
+          trailing: const Icon(Icons.arrow_back),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TelaCarros(proprietarioId: proprietario.id!),
+            ),
           ),
         ),
       ),

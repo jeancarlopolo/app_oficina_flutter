@@ -32,72 +32,79 @@ class _ItemCardState extends State<ItemCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-        key: const ValueKey(0),
-        endActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          children: <Widget>[
-            SlidableAction(
-              onPressed: (context) {
-                final mapa = widget.checklistItem.toMap();
-                mapa['precisaReparo'] = 1 - mapa['precisaReparo'];
-                OficinaDB.instance.atualizarChecklistItem(mapa);
-              },
-              icon: precisaReparo.watch(context) == 1
-                  ? Icons.warning
-                  : Icons.warning_amber,
-              backgroundColor: precisaReparo.watch(context) == 1
-                  ? Colors.yellow
-                  : Colors.grey,
-            ),
-            SlidableAction(
-              onPressed: (context) {
-                final mapa = widget.checklistItem.toMap();
-                mapa['precisaTrocar'] = 1 - mapa['precisaTrocar'];
-                OficinaDB.instance.atualizarChecklistItem(mapa);
-              },
-              icon: precisaTrocar.watch(context) == 1
-                  ? Icons.build
-                  : Icons.build_circle,
-              backgroundColor: precisaTrocar.watch(context) == 1
-                  ? Colors.red
-                  : Colors.grey,
-            ),
-            SlidableAction(
-              onPressed: (context) {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text('Observação'),
-                        content: TextField(
-                          controller: TextEditingController()
-                            ..text = widget.checklistItem.observacao,
-                          onChanged: (value) {
-                            final mapa = widget.checklistItem.toMap();
-                            mapa['observacao'] = value;
-                            OficinaDB.instance.atualizarChecklistItem(mapa);
-                          },
-                        ),
-                      );
-                    });
-              },
-              icon: Icons.edit,
-              backgroundColor: Colors.blue,
-            ),
-          ],
-        ),
-        child: ListTile(
-      title: Row(children: [
-        widget.checklistItem.precisaReparo
-            ? const Icon(Icons.warning, color: Colors.yellow)
-            : const SizedBox(),
-        widget.checklistItem.precisaTrocar
-            ? const Icon(Icons.build, color: Colors.red)
-            : const SizedBox(),
-        Text(nomeItem),
-      ]),
-      subtitle: Text(widget.checklistItem.observacao),
-    ));
+    return Container(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Slidable(
+          key: const ValueKey(0),
+          endActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            children: <Widget>[
+              SlidableAction(
+                onPressed: (context) {
+                  final mapa = widget.checklistItem.toMap();
+                  mapa['precisaReparo'] = 1 - mapa['precisaReparo'];
+                  OficinaDB.instance.atualizarChecklistItem(mapa);
+                },
+                icon: precisaReparo.watch(context) == 1
+                    ? Icons.warning
+                    : Icons.warning_amber,
+                backgroundColor: precisaReparo.watch(context) == 1
+                    ? Colors.yellow
+                    : Colors.grey,
+              ),
+              SlidableAction(
+                onPressed: (context) {
+                  final mapa = widget.checklistItem.toMap();
+                  mapa['precisaTrocar'] = 1 - mapa['precisaTrocar'];
+                  OficinaDB.instance.atualizarChecklistItem(mapa);
+                },
+                icon: precisaTrocar.watch(context) == 1
+                    ? Icons.build
+                    : Icons.build_circle,
+                backgroundColor: precisaTrocar.watch(context) == 1
+                    ? Colors.red
+                    : Colors.grey,
+              ),
+              SlidableAction(
+                onPressed: (context) {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Observação'),
+                          content: TextField(
+                            controller: TextEditingController()
+                              ..text = widget.checklistItem.observacao,
+                            onChanged: (value) {
+                              final mapa = widget.checklistItem.toMap();
+                              mapa['observacao'] = value;
+                              OficinaDB.instance.atualizarChecklistItem(mapa);
+                            },
+                          ),
+                        );
+                      });
+                },
+                icon: Icons.edit,
+                backgroundColor: Colors.blue,
+              ),
+            ],
+          ),
+          child: ListTile(
+            title: Row(children: [
+              widget.checklistItem.precisaReparo
+                  ? const Icon(Icons.warning, color: Colors.yellow)
+                  : const SizedBox(),
+              widget.checklistItem.precisaTrocar
+                  ? const Icon(Icons.build, color: Colors.red)
+                  : const SizedBox(),
+              Text(nomeItem),
+            ]),
+            subtitle: Text(widget.checklistItem.observacao),
+          )),
+    );
   }
 }

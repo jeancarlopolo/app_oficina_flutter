@@ -17,19 +17,21 @@ class CarroDialog extends StatefulWidget {
 
 class _CarroDialogState extends State<CarroDialog> {
   final _formKey = GlobalKey<FormState>();
-  late String _placa;
-  late String _modelo;
-  late String _cor;
-  late String _motorista;
-  late String _marca;
-  late int _ano;
-  late int _quilometragem;
+  String? _placa;
+  String? _modelo;
+  String? _cor;
+  String? _motorista;
+  String? _marca;
+  String? _placaAntiga;
+  int? _ano;
+  int? _quilometragem;
 
   @override
   void initState() {
     super.initState();
     // Inicializa os valores com o carro existente ou padrões
     _placa = widget.carro?.placa ?? '';
+    _placaAntiga = widget.carro?.placa ?? '';
     _modelo = widget.carro?.modelo ?? '';
     _cor = widget.carro?.cor ?? Cor.branca.nome;
     _marca = widget.carro?.marca ?? '';
@@ -64,7 +66,7 @@ class _CarroDialogState extends State<CarroDialog> {
                 onSaved: (value) => _modelo = value!,
               ),
               DropdownButtonFormField<String>(
-                value: _cor,
+                value: Cor.getCor(_cor!).nome,
                 decoration: const InputDecoration(labelText: 'Cor'),
                 items: Cor.values.map((Cor cor) {
                   return DropdownMenuItem<String>(
@@ -120,16 +122,17 @@ class _CarroDialogState extends State<CarroDialog> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              final novoCarro = Carro(
-                placa: _placa,
-                modelo: _modelo,
-                cor: _cor,
-                motorista: _motorista,
-                marca: _marca,
-                ano: _ano,
-                quilometragem: _quilometragem,
-                proprietarioId: widget.proprietarioId,
-              );
+              final novoCarro = {
+                'placa': _placa!.toUpperCase().replaceAll(' ', '').replaceAll('-', ''),
+                'placaAntiga': _placaAntiga!.toUpperCase(),
+                'modelo': _modelo,
+                'cor': _cor,
+                'motorista': _motorista,
+                'marca': _marca,
+                'ano': _ano,
+                'quilometragem': _quilometragem,
+                'proprietarioId': widget.proprietarioId,
+              };
               Navigator.of(context).pop(novoCarro);
             }
           },

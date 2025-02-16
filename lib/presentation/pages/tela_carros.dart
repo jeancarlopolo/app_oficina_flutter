@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:logger/logger.dart';
+import 'package:oficina/database/oficina_db.dart';
 import 'package:oficina/models/carro.dart';
 import 'package:oficina/presentation/widgets/cards/carro_card.dart';
 import 'package:oficina/presentation/widgets/dialogs/carro_dialog.dart';
 import 'package:oficina/services/carro_controller.dart';
+import 'package:signals_flutter/signals_flutter.dart';
 
 class TelaCarros extends StatefulWidget {
   const TelaCarros({super.key, required this.proprietarioId});
@@ -18,18 +21,19 @@ class _TelaCarrosState extends State<TelaCarros> {
   @override
   void initState() {
     super.initState();
-    if (_carroController.pagingController.itemList?.isEmpty ?? true) {
-      _carroController.pagingController.addPageRequestListener(
-        (pageKey) =>
-            _carroController.fetchCarros(widget.proprietarioId, pageKey),
-      );
-    }
+    _carroController.pagingController.addPageRequestListener(
+      (pageKey) => _carroController.fetchCarros(widget.proprietarioId, pageKey),
+    );
   }
 
   final _carroController = CarroController();
 
   @override
   Widget build(BuildContext context) {
+    effect(() {
+      OficinaDB.instance.dataChanged.watch(context);
+      _carroController.pagingController.refresh();
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text('Carros'),
@@ -43,19 +47,42 @@ class _TelaCarrosState extends State<TelaCarros> {
             },
           );
           if (novoCarro != null) {
-            _carroController.pagingController.itemList!.add(novoCarro);
+            try {
+              await OficinaDB.instance.inserirCarro(novoCarro);
+            } catch (e) {
+              Logger().e(e);
+              if (context.mounted) {
+                // placa já existe
+                await showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Erro'),
+                    content: const Text('Placa já cadastrada'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            }
           }
         },
         child: const Icon(Icons.add),
       ),
-      body: PagedListView(
-        pagingController: _carroController.pagingController,
-        builderDelegate: PagedChildBuilderDelegate<Map<String,dynamic>>(
-          itemBuilder: (context, carro, index) {
-            return CarroCard(carro: Carro.fromMap(carro));
-          },
-        ),
-      ),
+      body: Watch((context) {
+        OficinaDB.instance.dataChanged;
+        return PagedListView(
+          pagingController: _carroController.pagingController,
+          builderDelegate: PagedChildBuilderDelegate<Carro>(
+            itemBuilder: (context, carro, index) {
+              return CarroCard(carro: carro);
+            },
+          ),
+        );
+      }),
     );
   }
 }

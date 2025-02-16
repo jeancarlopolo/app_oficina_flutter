@@ -14,7 +14,7 @@ class OficinaDB {
   final dataChanged = signal(0);
 
   Future<void> init() async {
-    _db = await openDatabase('oficina.db', version: 1,
+    _db = await openDatabase('oficina.db', version: 2,
         onConfigure: (Database db) async {
       await db.execute('PRAGMA foreign_keys = ON;');
     }, onCreate: (Database db, int version) async {
@@ -64,12 +64,6 @@ class OficinaDB {
         PRIMARY KEY (checklistId, itemId)
       )
     ''');
-      await db.execute('''
-      CREATE INDEX idx_carro_proprietarioId ON carro(proprietarioId);
-    ''');
-      await db.execute('''
-      CREATE INDEX idx_checklist_placa ON checklist(placa);
-    ''');
     });
   }
 
@@ -77,7 +71,7 @@ class OficinaDB {
     String proprietarioCsv =
         await rootBundle.loadString('mock/proprietario.csv');
     List<List<dynamic>> proprietarios =
-        const CsvToListConverter().convert(proprietarioCsv);
+        const CsvToListConverter(eol: '\n').convert(proprietarioCsv);
     for (var proprietario in proprietarios) {
       await inserirProprietario({
         'nome': proprietario[1],
@@ -85,7 +79,7 @@ class OficinaDB {
       });
     }
     String carroCsv = await rootBundle.loadString('mock/carro.csv');
-    List<List<dynamic>> carros = const CsvToListConverter().convert(carroCsv);
+    List<List<dynamic>> carros = const CsvToListConverter(eol: '\n').convert(carroCsv);
     for (var carro in carros) {
       await inserirCarro({
         'placa': carro[0],
@@ -99,13 +93,13 @@ class OficinaDB {
       });
     }
     String itemCsv = await rootBundle.loadString('mock/item.csv');
-    List<List<dynamic>> itens = const CsvToListConverter().convert(itemCsv);
+    List<List<dynamic>> itens = const CsvToListConverter(eol: '\n').convert(itemCsv);
     for (var item in itens) {
       await inserirItem({'nome': item[1]});
     }
     String checklistCsv = await rootBundle.loadString('mock/checklist.csv');
     List<List<dynamic>> checklists =
-        const CsvToListConverter().convert(checklistCsv);
+        const CsvToListConverter(eol: '\n').convert(checklistCsv);
     for (var checklist in checklists) {
       await inserirChecklist({
         'dataHorario': checklist[1],
@@ -115,7 +109,7 @@ class OficinaDB {
     String checklistItemCsv =
         await rootBundle.loadString('mock/checklistItem.csv');
     List<List<dynamic>> checklistItens =
-        const CsvToListConverter().convert(checklistItemCsv);
+        const CsvToListConverter(eol: '\n').convert(checklistItemCsv);
     for (var checklistItem in checklistItens) {
       await inserirChecklistItem({
         'checklistId': checklistItem[0],
@@ -131,11 +125,13 @@ class OficinaDB {
   Future<int> inserirProprietario(Map<String, dynamic> proprietario) async {
     final id = await _db.insert('proprietario', proprietario);
     dataChanged.value++;
-    Logger().i('Proprietario {${proprietario['nome']}} inserido');
+    Logger().i('Proprietario $id ${proprietario['nome']} inserido');
     return id;
   }
 
   Future<void> inserirCarro(Map<String, dynamic> carro) async {
+    carro ['placa'] = carro['placa'].toUpperCase().replaceAll(' ', '').replaceAll('-', '');
+    carro.remove('placaAntiga');
     await _db.insert('carro', carro,
         conflictAlgorithm: ConflictAlgorithm.replace);
     dataChanged.value++;
@@ -143,9 +139,16 @@ class OficinaDB {
   }
 
   Future<int> inserirChecklist(Map<String, dynamic> checklist) async {
+    checklist['placa'] = checklist['placa'].toUpperCase().replaceAll(' ', '').replaceAll('-', '');
+    if(await _db.rawQuery('''
+      SELECT EXISTS(SELECT 1 FROM carro WHERE placa = ?)
+    ''', [checklist['placa']]).then((value) => value[0].values.first) == 0) {
+      Logger().e('Placa ${checklist['placa']} não existe');
+      return -1;
+    }
     final id = await _db.insert('checklist', checklist);
     dataChanged.value++;
-    Logger().i('Checklist {${checklist['id']}} inserido');
+    Logger().i('Checklist $id inserido');
     return id;
   }
 
@@ -215,7 +218,6 @@ class OficinaDB {
       LEFT JOIN checklistItem
           ON item.id = checklistItem.itemId
           AND checklistItem.checklistId = ?
-          SORT BY item.id
     ''', [checklistId]);
 
     return result;
@@ -229,7 +231,19 @@ class OficinaDB {
     Logger().i('Proprietario {${proprietario['nome']}} atualizado');
   }
 
+  // passar placa antiga e nova
   Future<void> atualizarCarro(Map<String, dynamic> carro) async {
+    if (carro['placa'] != carro['placaAntiga']) {
+      bool jaExiste = (await _db.rawQuery('''
+        SELECT EXISTS(SELECT 1 FROM carro WHERE placa = ?)
+      ''', [carro['placa']]))[0].values.first == 1;
+      if (jaExiste) {
+        throw Exception('Placa já existe');
+      }
+    }
+    carro.remove('placaAntiga');
+    carro ['placa'] = carro['placa'].toUpperCase().replaceAll(' ', '').replaceAll('-', '');
+    
     await _db.rawUpdate('''
       UPDATE carro SET modelo = ?, cor = ?, motorista = ?, proprietarioId = ? WHERE placa = ?
     ''', [
@@ -396,19 +410,31 @@ class OficinaDB {
 
   Future<void> apagarTudo() async {
     await _db.execute('''
-      DELETE FROM proprietario
+      DELETE FROM proprietario 
+    ''');
+    await _db.execute('''
+      DELETE FROM sqlite_sequence WHERE name = 'proprietario'
     ''');
     Logger().i('Todos os proprietarios apagados');
     await _db.execute('''
       DELETE FROM carro
     ''');
+    await _db.execute('''
+      DELETE FROM sqlite_sequence WHERE name = 'carro'
+    ''');
     Logger().i('Todos os carros apagados');
     await _db.execute('''
       DELETE FROM checklist
     ''');
+    await _db.execute('''
+      DELETE FROM sqlite_sequence WHERE name = 'checklist'
+    ''');
     Logger().i('Todos os checklists apagados');
     await _db.execute('''
       DELETE FROM item
+    ''');
+    await _db.execute('''
+      DELETE FROM sqlite_sequence WHERE name = 'item'
     ''');
     Logger().i('Todos os itens apagados');
     await _db.execute('''

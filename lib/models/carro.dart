@@ -13,7 +13,7 @@ enum Cor {
     decoration: BoxDecoration(
       gradient: LinearGradient(
         colors: [
-          Color(0xFFFFF176),
+          Color.fromARGB(255, 255, 253, 232),
           Color(0xFFFFD700),
         ],
         begin: Alignment.topLeft,
@@ -29,8 +29,8 @@ enum Cor {
     decoration: BoxDecoration(
       gradient: LinearGradient(
         colors: [
-          Color(0xFFE0E0E0),
-          Color(0xFFC0C0C0),
+          Color.fromARGB(255, 255, 255, 255),
+          Color.fromARGB(255, 174, 174, 174),
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -43,7 +43,8 @@ enum Cor {
   roxa(decoration: BoxDecoration(color: Color(0xFF9C27B0)), nome: 'Roxa'),
   verde(decoration: BoxDecoration(color: Color(0xFF4CAF50)), nome: 'Verde'),
   vermelha(
-      decoration: BoxDecoration(color: Color(0xFFF44336)), nome: 'Vermelha'),
+      decoration: BoxDecoration(color: Color.fromARGB(255, 255, 17, 0)),
+      nome: 'Vermelha'),
   fantasia(
     decoration: BoxDecoration(
       gradient: LinearGradient(
@@ -68,7 +69,7 @@ enum Cor {
 
   const Cor({required this.decoration, required this.nome});
 
-  static Cor getCor (String nome) {
+  static Cor getCor(String nome) {
     for (final cor in Cor.values) {
       if (cor.nome.toUpperCase() == nome.toUpperCase()) {
         return cor;
@@ -79,13 +80,11 @@ enum Cor {
 
   Color get textColor {
     if (decoration.color != null) {
-      return decoration.color!.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+      return decoration.color!.computeLuminance() > 0.5
+          ? Colors.black
+          : Colors.white;
     } else {
-      final colors = (this as Gradient).colors;
-      final averageLuminance = colors
-          .map((color) => color.computeLuminance())
-          .reduce((a, b) => a + b) / colors.length;
-      return averageLuminance > 0.5 ? Colors.black : Colors.white;
+      return Colors.black;
     }
   }
 }

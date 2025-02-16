@@ -12,8 +12,8 @@ class ProprietarioDialog extends StatefulWidget {
 
 class _ProprietarioDialogState extends State<ProprietarioDialog> {
   final _formKey = GlobalKey<FormState>();
-  late String _nome;
-  late String _telefone;
+  String? _nome;
+  String? _telefone;
 
   @override
   void initState() {
@@ -65,11 +65,11 @@ class _ProprietarioDialogState extends State<ProprietarioDialog> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              final novoProprietario = Proprietario(
-                id: widget.proprietario?.id,
-                nome: _nome,
-                telefone: _telefone,
-              );
+              final novoProprietario = Map<String, dynamic>.from({
+                'id': widget.proprietario?.id,
+                'nome': _nome,
+                'telefone': _telefone,
+              });
               Navigator.of(context).pop(novoProprietario);
             }
           },
