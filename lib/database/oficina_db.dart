@@ -14,7 +14,7 @@ class OficinaDB {
   final dataChanged = signal(0);
 
   Future<void> init() async {
-    _db = await openDatabase('oficina.db', version: 4,
+    _db = await openDatabase('oficina.db', version: 6,
         onConfigure: (Database db) async {
       await db.execute('PRAGMA foreign_keys = ON;');
     }, onCreate: (Database db, int version) async {
@@ -54,16 +54,16 @@ class OficinaDB {
     ''');
       await db.execute('''
       CREATE TABLE checklistItem (
-        checklistId INTEGER PRIMARY KEY,
-        itemId INTEGER PRIMARY KEY,
+        checklistId INTEGER,
+        itemId INTEGER,
         precisaReparo INTEGER CHECK (precisaReparo IN (0, 1)),
         precisaTrocar INTEGER CHECK (precisaTrocar IN (0, 1)),
         observacao TEXT,
         FOREIGN KEY (checklistId) REFERENCES checklist (id) ON DELETE CASCADE,
         FOREIGN KEY (itemId) REFERENCES item (id),
+        PRIMARY KEY (checklistId, itemId)
       )
     ''');
-      await inserirItens();
     });
   }
 
@@ -71,7 +71,10 @@ class OficinaDB {
     String itemCsv = await rootBundle.loadString('mock/item.csv');
     final itens = const CsvToListConverter(eol: '\n').convert(itemCsv);
     for (var item in itens) {
-      var itemTratado = {'nome': item[1].toString().replaceAll('\r', ''), 'id': item[0]};
+      var itemTratado = {
+        'nome': item[1].toString().replaceAll('\r', ''),
+        'id': item[0]
+      };
       await inserirItem(itemTratado);
     }
     logger.i('${await buscarItens()} itens inseridos');
