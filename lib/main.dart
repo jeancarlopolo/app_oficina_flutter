@@ -8,7 +8,6 @@ final Logger logger = Logger();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await OficinaDB.instance.init();
-  await OficinaDB.instance.inserirItens();
 
   runApp(const Aplicativo());
 }

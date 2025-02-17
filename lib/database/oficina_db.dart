@@ -65,6 +65,11 @@ class OficinaDB {
       )
     ''');
     });
+    if (await _db.rawQuery('''SELECT COUNT(*) FROM item''').then(
+            (value) => value[0].values.first) ==
+        0) {
+      await OficinaDB.instance.inserirItens();
+    }
   }
 
   Future<void> inserirItens() async {
