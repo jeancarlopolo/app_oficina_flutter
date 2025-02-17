@@ -12,6 +12,8 @@ Este aplicativo em Flutter auxilia oficinas mecânicas na gestão de suas opera�
 
 - **Itens do Checklist**: Cada checklist possui diversos itens que podem ser marcados para indicar se precisam de reparo ou troca, além de permitir adicionar observações.  
 
+- **Relatórios**: Geração de relatórios no clipboard do sistema, com informações sobre o banco de dados.
+
 ### Tecnologias Utilizadas
 
 - **Flutter** e **Dart**: Para o desenvolvimento do aplicativo.
