@@ -1,4 +1,4 @@
-## Documentação - App de Oficina Mecânica
+## App de Oficina Mecânica
 
 ### Visão Geral
 
@@ -94,6 +94,8 @@ Para executar o aplicativo, é necessário [ter o Flutter instalado e configurad
 Um emulador ou dispositivo físico deve estar conectado para a execução do aplicativo.
 
 Um apk de exemplo pré-compilado também está disponível (app-release.apk) para instalação em dispositivos Android.
+
+Um pdf com a documentação acadêmica também está disponível.
    
 ### Considerações Finais
 
