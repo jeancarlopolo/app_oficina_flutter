@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'package:flutter/services.dart';
 import 'package:oficina/database/oficina_db.dart';
-import 'package:path_provider/path_provider.dart';
 
 class ConfigDialog extends StatelessWidget {
   const ConfigDialog({super.key});
@@ -17,61 +14,83 @@ class ConfigDialog extends StatelessWidget {
         children: <Widget>[
           ElevatedButton(
             onPressed: () async {
-              // salva no dispositivo relatorio_mais_carros.txt
               // OficinaDB.instance.relatorioProprietariosMaisCarros() retorna uma string
-              final path = await getApplicationDocumentsDirectory()
-                ..path;
-              final file = File('$path/relatorio_mais_carros.txt');
-              await file.create(recursive: true);
-              await file.writeAsString(
-                await OficinaDB.instance.relatorioProprietariosMaisCarros(),
+              Clipboard.setData(
+                ClipboardData(
+                  text: await OficinaDB.instance
+                      .relatorioProprietariosMaisCarros(),
+                ),
               );
-              Logger().i('Relatório salvo em $path/relatorio_mais_carros.txt');
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content:
+                        Text('Relatório copiado para a área de transferência'),
+                  ),
+                );
+              }
             },
             child: const Text('Gerar relatório de quem tem mais carros'),
           ),
           ElevatedButton(
             onPressed: () async {
-              // salva no dispositivo relatorio_carros_com_mais_problemas.txt
               // OficinaDB.instance.relatorioCarrosMaisNecessitados() retorna uma string
-              final path = await getApplicationDocumentsDirectory()
-                ..path;
-              final file =
-                  File('$path/relatorio_carros_com_mais_problemas.txt');
-              await file.create(recursive: true);
-
-              await file.writeAsString(
-                await OficinaDB.instance.relatorioCarrosMaisNecessitados(),
+              Clipboard.setData(
+                ClipboardData(
+                  text: await OficinaDB.instance
+                      .relatorioCarrosMaisNecessitados(),
+                ),
               );
-              Logger().i(
-                  'Relatório salvo em $path/relatorio_carros_com_mais_problemas.txt');
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content:
+                        Text('Relatório copiado para a área de transferência'),
+                  ),
+                );
+              }
             },
             child: const Text('Gerar relatório de carros com mais problemas'),
           ),
           ElevatedButton(
             onPressed: () async {
-              // salva no dispositivo relatorio_carros_desatualizados.txt
               // OficinaDB.instance.relatorioCarrosQueFazemMaisTempoDesdeAUltimaChecklist() retorna uma string
-              final path = await getApplicationDocumentsDirectory()
-                ..path;
-              final file = File('$path/relatorio_carros_desatualizados.txt');
-              await file.create(recursive: true);
-              await file.writeAsString(
-                await OficinaDB.instance
-                    .relatorioCarrosQueFazemMaisTempoDesdeAUltimaChecklist(),
+              Clipboard.setData(
+                ClipboardData(
+                  text: await OficinaDB.instance
+                      .relatorioCarrosQueFazemMaisTempoDesdeAUltimaChecklist(),
+                ),
               );
-              Logger().i(
-                  'Relatório salvo em $path/relatorio_carros_desatualizados.txt');
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content:
+                        Text('Relatório copiado para a área de transferência'),
+                  ),
+                );
+              }
             },
             child: const Text(
                 'Gerar relatório de carros que estão mais tempo sem checklist'),
           ),
           ElevatedButton(
-              onPressed: () => OficinaDB.instance.apagarTudo(),
+              onPressed: () async {
+                await OficinaDB.instance.apagarTudo();
+                OficinaDB.instance.inserirItens();
+              },
               child: const Text('APAGAR TUDO')),
           ElevatedButton(
-              onPressed: () => OficinaDB.instance.mock(),
-              child: const Text('Adicionar dados falsos')),
+              onPressed: () async {
+                await OficinaDB.instance.mock();
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Dados falsos adicionados'),
+                    ),
+                  );
+                }
+              },
+              child: const Text('Adicionar dados falsos (demora um pouco)')),
         ],
       ),
       actions: <Widget>[

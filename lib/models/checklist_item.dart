@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+
 class ChecklistItem {
   int checklistId;
   int itemId;
@@ -35,25 +36,27 @@ class ChecklistItem {
     return <String, dynamic>{
       'checklistId': checklistId,
       'itemId': itemId,
-      'precisaReparo': precisaReparo,
-      'precisaTrocar': precisaTrocar,
+      'precisaReparo': precisaReparo == true ? 1 : 0,
+      'precisaTrocar': precisaTrocar == true ? 1 : 0,
       'observacao': observacao,
     };
   }
 
   factory ChecklistItem.fromMap(Map<String, dynamic> map) {
-    return ChecklistItem(
+    final checklistItem = ChecklistItem(
       checklistId: map['checklistId'] as int,
       itemId: map['itemId'] as int,
-      precisaReparo: map['precisaReparo'] as bool,
-      precisaTrocar: map['precisaTrocar'] as bool,
+      precisaReparo: map['precisaReparo'] == 1,
+      precisaTrocar: map['precisaTrocar'] == 1,
       observacao: map['observacao'] as String,
     );
+    return checklistItem;
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ChecklistItem.fromJson(String source) => ChecklistItem.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ChecklistItem.fromJson(String source) =>
+      ChecklistItem.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -63,21 +66,20 @@ class ChecklistItem {
   @override
   bool operator ==(covariant ChecklistItem other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.checklistId == checklistId &&
-      other.itemId == itemId &&
-      other.precisaReparo == precisaReparo &&
-      other.precisaTrocar == precisaTrocar &&
-      other.observacao == observacao;
+
+    return other.checklistId == checklistId &&
+        other.itemId == itemId &&
+        other.precisaReparo == precisaReparo &&
+        other.precisaTrocar == precisaTrocar &&
+        other.observacao == observacao;
   }
 
   @override
   int get hashCode {
     return checklistId.hashCode ^
-      itemId.hashCode ^
-      precisaReparo.hashCode ^
-      precisaTrocar.hashCode ^
-      observacao.hashCode;
+        itemId.hashCode ^
+        precisaReparo.hashCode ^
+        precisaTrocar.hashCode ^
+        observacao.hashCode;
   }
 }

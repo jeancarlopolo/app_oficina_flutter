@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:logger/logger.dart';
 import 'package:oficina/database/oficina_db.dart';
+import 'package:oficina/main.dart';
 import 'package:oficina/models/carro.dart';
 import 'package:oficina/presentation/widgets/cards/carro_card.dart';
 import 'package:oficina/presentation/widgets/dialogs/carro_dialog.dart';
@@ -50,7 +50,7 @@ class _TelaCarrosState extends State<TelaCarros> {
             try {
               await OficinaDB.instance.inserirCarro(novoCarro);
             } catch (e) {
-              Logger().e(e);
+              logger.e(e);
               if (context.mounted) {
                 // placa já existe
                 await showDialog(

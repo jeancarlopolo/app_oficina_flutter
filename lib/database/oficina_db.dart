@@ -1,6 +1,6 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
-import 'package:logger/logger.dart';
+import 'package:oficina/main.dart';
 import 'package:signals_flutter/signals_core.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -14,7 +14,7 @@ class OficinaDB {
   final dataChanged = signal(0);
 
   Future<void> init() async {
-    _db = await openDatabase('oficina.db', version: 2,
+    _db = await openDatabase('oficina.db', version: 4,
         onConfigure: (Database db) async {
       await db.execute('PRAGMA foreign_keys = ON;');
     }, onCreate: (Database db, int version) async {
@@ -48,23 +48,33 @@ class OficinaDB {
     ''');
       await db.execute('''
       CREATE TABLE item (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id INTEGER PRIMARY KEY,
         nome TEXT NOT NULL UNIQUE
       )
     ''');
       await db.execute('''
       CREATE TABLE checklistItem (
-        checklistId INTEGER,
-        itemId INTEGER,
+        checklistId INTEGER PRIMARY KEY,
+        itemId INTEGER PRIMARY KEY,
         precisaReparo INTEGER CHECK (precisaReparo IN (0, 1)),
         precisaTrocar INTEGER CHECK (precisaTrocar IN (0, 1)),
         observacao TEXT,
         FOREIGN KEY (checklistId) REFERENCES checklist (id) ON DELETE CASCADE,
         FOREIGN KEY (itemId) REFERENCES item (id),
-        PRIMARY KEY (checklistId, itemId)
       )
     ''');
+      await inserirItens();
     });
+  }
+
+  Future<void> inserirItens() async {
+    String itemCsv = await rootBundle.loadString('mock/item.csv');
+    final itens = const CsvToListConverter(eol: '\n').convert(itemCsv);
+    for (var item in itens) {
+      var itemTratado = {'nome': item[1].toString().replaceAll('\r', ''), 'id': item[0]};
+      await inserirItem(itemTratado);
+    }
+    logger.i('${await buscarItens()} itens inseridos');
   }
 
   Future<void> mock() async {
@@ -73,13 +83,12 @@ class OficinaDB {
     List<List<dynamic>> proprietarios =
         const CsvToListConverter(eol: '\n').convert(proprietarioCsv);
     for (var proprietario in proprietarios) {
-      await inserirProprietario({
-        'nome': proprietario[1],
-        'telefone': proprietario[2]
-      });
+      await inserirProprietario(
+          {'nome': proprietario[1], 'telefone': proprietario[2]});
     }
     String carroCsv = await rootBundle.loadString('mock/carro.csv');
-    List<List<dynamic>> carros = const CsvToListConverter(eol: '\n').convert(carroCsv);
+    List<List<dynamic>> carros =
+        const CsvToListConverter(eol: '\n').convert(carroCsv);
     for (var carro in carros) {
       await inserirCarro({
         'placa': carro[0],
@@ -92,19 +101,12 @@ class OficinaDB {
         'proprietarioId': carro[7]
       });
     }
-    String itemCsv = await rootBundle.loadString('mock/item.csv');
-    List<List<dynamic>> itens = const CsvToListConverter(eol: '\n').convert(itemCsv);
-    for (var item in itens) {
-      await inserirItem({'nome': item[1]});
-    }
     String checklistCsv = await rootBundle.loadString('mock/checklist.csv');
     List<List<dynamic>> checklists =
         const CsvToListConverter(eol: '\n').convert(checklistCsv);
     for (var checklist in checklists) {
-      await inserirChecklist({
-        'dataHorario': checklist[1],
-        'placa': checklist[2]
-      });
+      await inserirChecklist(
+          {'dataHorario': checklist[1], 'placa': checklist[2]});
     }
     String checklistItemCsv =
         await rootBundle.loadString('mock/checklistItem.csv');
@@ -119,50 +121,71 @@ class OficinaDB {
         'observacao': checklistItem[4]
       });
     }
-    Logger().i('Mock inserido');
+    logger.i('Mock inserido');
   }
 
   Future<int> inserirProprietario(Map<String, dynamic> proprietario) async {
     final id = await _db.insert('proprietario', proprietario);
     dataChanged.value++;
-    Logger().i('Proprietario $id ${proprietario['nome']} inserido');
+    logger.i('Proprietario $id ${proprietario['nome']} inserido');
     return id;
   }
 
   Future<void> inserirCarro(Map<String, dynamic> carro) async {
-    carro ['placa'] = carro['placa'].toUpperCase().replaceAll(' ', '').replaceAll('-', '');
+    carro['placa'] =
+        carro['placa'].toUpperCase().replaceAll(' ', '').replaceAll('-', '');
     carro.remove('placaAntiga');
     await _db.insert('carro', carro,
         conflictAlgorithm: ConflictAlgorithm.replace);
     dataChanged.value++;
-    Logger().i('Carro {${carro['placa']}} inserido');
+    logger.i('Carro {${carro['placa']}} inserido');
   }
 
   Future<int> inserirChecklist(Map<String, dynamic> checklist) async {
-    checklist['placa'] = checklist['placa'].toUpperCase().replaceAll(' ', '').replaceAll('-', '');
-    if(await _db.rawQuery('''
+    checklist['placa'] = checklist['placa']
+        .toUpperCase()
+        .replaceAll(' ', '')
+        .replaceAll('-', '');
+    if (await _db.rawQuery('''
       SELECT EXISTS(SELECT 1 FROM carro WHERE placa = ?)
     ''', [checklist['placa']]).then((value) => value[0].values.first) == 0) {
-      Logger().e('Placa ${checklist['placa']} não existe');
+      logger.e('Placa ${checklist['placa']} não existe');
       return -1;
     }
     final id = await _db.insert('checklist', checklist);
     dataChanged.value++;
-    Logger().i('Checklist $id inserido');
+    logger.i('Checklist $id inserido');
     return id;
   }
 
   Future<void> inserirItem(Map<String, dynamic> item) async {
     await _db.insert('item', item);
     dataChanged.value++;
-    Logger().i('Item {${item['nome']}} inserido');
   }
 
   Future<void> inserirChecklistItem(Map<String, dynamic> checklistItem) async {
+    // verifica se a checklist existe
+    if (await _db.rawQuery('''
+      SELECT EXISTS(SELECT 1 FROM checklist WHERE id = ?)
+    ''', [
+          checklistItem['checklistId']
+        ]).then((value) => value[0].values.first) ==
+        0) {
+      logger.e('Checklist ${checklistItem['checklistId']} não existe');
+      return;
+    }
+    // verifica se o item existe
+    if (await _db.rawQuery('''
+      SELECT EXISTS(SELECT 1 FROM item WHERE id = ?)
+    ''', [checklistItem['itemId']]).then((value) => value[0].values.first) ==
+        0) {
+      logger.e('Item ${checklistItem['itemId']} não existe');
+      return;
+    }
     await _db.insert('checklistItem', checklistItem,
         conflictAlgorithm: ConflictAlgorithm.replace);
     dataChanged.value++;
-    Logger().i(
+    logger.i(
         'ChecklistItem {${checklistItem['checklistId']}, ${checklistItem['itemId']}} inserido');
   }
 
@@ -202,18 +225,25 @@ class OficinaDB {
   Future<List<Map<String, dynamic>>> buscarChecklistItens(
       int checklistId) async {
     // Insere os itens faltantes com valores padrão
-    await _db.execute(
-        '''INSERT INTO checklistItem (checklistId, itemId, precisaReparo, precisaTrocar, observacao)
-         SELECT ?, item.id, 0, 0, ''
-         FROM item
-         LEFT JOIN checklistItem 
-             ON item.id = checklistItem.itemId 
-             AND checklistItem.checklistId = ?
-         WHERE checklistItem.itemId IS NULL''', [checklistId, checklistId]);
+    final itens = await buscarItens();
+    final idsExistentes = (await _db.rawQuery('''
+      SELECT itemId FROM checklistItem WHERE checklistId = ?
+    ''', [checklistId])).map((e) => e['itemId']).toList();
+    for (var item in itens) {
+      if (!idsExistentes.contains(item['id'])) {
+        await inserirChecklistItem({
+          'checklistId': checklistId,
+          'itemId': item['id'],
+          'precisaReparo': 0,
+          'precisaTrocar': 0,
+          'observacao': ''
+        });
+      }
+    }
 
     // Retorna todos os itens do checklist
     final result = await _db.rawQuery('''
-      SELECT item.id, item.nome, precisaReparo, precisaTrocar, observacao
+      SELECT item.id, precisaReparo, precisaTrocar, observacao, checklistId, itemId
       FROM item
       LEFT JOIN checklistItem
           ON item.id = checklistItem.itemId
@@ -228,7 +258,7 @@ class OficinaDB {
       UPDATE proprietario SET nome = ?, telefone = ? WHERE id = ?
     ''', [proprietario['nome'], proprietario['telefone'], proprietario['id']]);
     dataChanged.value++;
-    Logger().i('Proprietario {${proprietario['nome']}} atualizado');
+    logger.i('Proprietario {${proprietario['nome']}} atualizado');
   }
 
   // passar placa antiga e nova
@@ -242,8 +272,9 @@ class OficinaDB {
       }
     }
     carro.remove('placaAntiga');
-    carro ['placa'] = carro['placa'].toUpperCase().replaceAll(' ', '').replaceAll('-', '');
-    
+    carro['placa'] =
+        carro['placa'].toUpperCase().replaceAll(' ', '').replaceAll('-', '');
+
     await _db.rawUpdate('''
       UPDATE carro SET modelo = ?, cor = ?, motorista = ?, proprietarioId = ? WHERE placa = ?
     ''', [
@@ -254,7 +285,7 @@ class OficinaDB {
       carro['placa']
     ]);
     dataChanged.value++;
-    Logger().i('Carro {${carro['placa']}} atualizado');
+    logger.i('Carro {${carro['placa']}} atualizado');
   }
 
   Future<void> atualizarChecklist(Map<String, dynamic> checklist) async {
@@ -262,7 +293,7 @@ class OficinaDB {
       UPDATE checklist SET dataHorario = ?, placa = ? WHERE id = ?
     ''', [checklist['dataHorario'], checklist['placa'], checklist['id']]);
     dataChanged.value++;
-    Logger().i('Checklist {${checklist['id']}} atualizado');
+    logger.i('Checklist {${checklist['id']}} atualizado');
   }
 
   Future<void> atualizarItem(Map<String, dynamic> item) async {
@@ -270,7 +301,7 @@ class OficinaDB {
       UPDATE item SET nome = ? WHERE id = ?
     ''', [item['nome'], item['id']]);
     dataChanged.value++;
-    Logger().i('Item {${item['nome']}} atualizado');
+    logger.i('Item {${item['nome']}} atualizado');
   }
 
   Future<void> atualizarChecklistItem(
@@ -285,7 +316,7 @@ class OficinaDB {
       checklistItem['itemId']
     ]);
     dataChanged.value++;
-    Logger().i(
+    logger.i(
         'ChecklistItem {${checklistItem['checklistId']}, ${checklistItem['itemId']}} atualizado');
   }
 
@@ -294,7 +325,7 @@ class OficinaDB {
       DELETE FROM proprietario WHERE id = ?
     ''', [id]);
     dataChanged.value++;
-    Logger().i('Proprietario {id: $id} apagado');
+    logger.i('Proprietario {id: $id} apagado');
   }
 
   Future<void> apagarCarro(String placa) async {
@@ -302,7 +333,7 @@ class OficinaDB {
       DELETE FROM carro WHERE placa = ?
     ''', [placa]);
     dataChanged.value++;
-    Logger().i('Carro {placa: $placa} apagado');
+    logger.i('Carro {placa: $placa} apagado');
   }
 
   Future<void> apagarChecklist(int id) async {
@@ -310,7 +341,7 @@ class OficinaDB {
       DELETE FROM checklist WHERE id = ?
     ''', [id]);
     dataChanged.value++;
-    Logger().i('Checklist {id: $id} apagado');
+    logger.i('Checklist {id: $id} apagado');
   }
 
   Future<void> apagarItem(int id) async {
@@ -318,7 +349,7 @@ class OficinaDB {
       DELETE FROM item WHERE id = ?
     ''', [id]);
     dataChanged.value++;
-    Logger().i('Item {id: $id} apagado');
+    logger.i('Item {id: $id} apagado');
   }
 
   Future<void> apagarChecklistItem(int checklistId, int itemId) async {
@@ -326,7 +357,7 @@ class OficinaDB {
       DELETE FROM checklistItem WHERE checklistId = ? AND itemId = ?
     ''', [checklistId, itemId]);
     dataChanged.value++;
-    Logger().i(
+    logger.i(
         'ChecklistItem {checklistId: $checklistId, itemId: $itemId} apagado');
   }
 
@@ -349,13 +380,15 @@ class OficinaDB {
     INNER JOIN proprietario p ON c.proprietarioId = p.id
     GROUP BY c.placa, p.nome
     HAVING 'Quantidade de Problemas' > 0
-    ORDER BY 'Quantidade de Problemas' DESC;
+    ORDER BY SUM(CASE WHEN ci.precisaReparo = 1 OR ci.precisaTrocar = 1 THEN 1 ELSE 0 END) DESC;
     ''');
     String relatorio = 'Carros mais necessitados:\n';
     for (var carro in carros) {
       relatorio +=
           '${carro['Dono']} - ${carro['Placa do Carro']} - ${carro['Quantidade de Problemas']} problemas\n';
     }
+    logger.i('Relatório: $relatorio');
+
     return relatorio;
   }
 
@@ -368,13 +401,15 @@ class OficinaDB {
     FROM carro c
     INNER JOIN proprietario p ON c.proprietarioId = p.id
     GROUP BY p.nome
-    ORDER BY 'Quantidade de Carros' DESC;
+    ORDER BY COUNT(c.placa) DESC;
     ''');
     String relatorio = 'Proprietarios com mais carros:\n';
     for (var proprietario in proprietarios) {
       relatorio +=
           '${proprietario['Dono']} - ${proprietario['Quantidade de Carros']} carros\n';
     }
+    logger.i('Relatório: $relatorio');
+
     return relatorio;
   }
 
@@ -394,17 +429,32 @@ class OficinaDB {
     String relatorio =
         'Carros que fazem mais tempo desde a última checklist:\n';
     for (var carro in carros) {
-      var dias =
-          (carro['Tempo Desde Última Checklist (segundos)'] / 86400).floor();
-      var horas =
-          ((carro['Tempo Desde Última Checklist (segundos)'] % 86400) / 3600)
-              .floor();
-      var minutos =
-          ((carro['Tempo Desde Última Checklist (segundos)'] % 3600) / 60)
-              .floor();
-      relatorio +=
-          '${carro['Nome do Dono']} - ${carro['Placa do Carro']} - $dias dias, $horas horas, $minutos minutos\n';
+      int dias = (int.parse(
+                  carro['Tempo Desde Última Checklist (segundos)'].toString()) /
+              86400)
+          .floor();
+      int horas = ((int.parse(carro['Tempo Desde Última Checklist (segundos)']
+                      .toString()) %
+                  86400) /
+              3600)
+          .floor();
+      int minutos = ((int.parse(carro['Tempo Desde Última Checklist (segundos)']
+                      .toString()) %
+                  3600) /
+              60)
+          .floor();
+      final String diasStr = dias > 0 ? '$dias dias, ' : '';
+      final String horasStr = horas > 0 ? '$horas horas, ' : '';
+
+      String linha =
+          '${carro['Nome do Dono']} - ${carro['Placa do Carro']} - $diasStr$horasStr$minutos minutos\n';
+      if (dias > 10000) {
+        linha =
+            '${carro['Nome do Dono']} - ${carro['Placa do Carro']} - Nunca fez checklist\n';
+      }
+      relatorio += linha;
     }
+    logger.i('Relatório: $relatorio');
     return relatorio;
   }
 
@@ -415,32 +465,32 @@ class OficinaDB {
     await _db.execute('''
       DELETE FROM sqlite_sequence WHERE name = 'proprietario'
     ''');
-    Logger().i('Todos os proprietarios apagados');
+    logger.i('Todos os proprietarios apagados');
     await _db.execute('''
       DELETE FROM carro
     ''');
     await _db.execute('''
       DELETE FROM sqlite_sequence WHERE name = 'carro'
     ''');
-    Logger().i('Todos os carros apagados');
+    logger.i('Todos os carros apagados');
     await _db.execute('''
       DELETE FROM checklist
     ''');
     await _db.execute('''
       DELETE FROM sqlite_sequence WHERE name = 'checklist'
     ''');
-    Logger().i('Todos os checklists apagados');
+    logger.i('Todos os checklists apagados');
     await _db.execute('''
       DELETE FROM item
     ''');
     await _db.execute('''
       DELETE FROM sqlite_sequence WHERE name = 'item'
     ''');
-    Logger().i('Todos os itens apagados');
+    logger.i('Todos os itens apagados');
     await _db.execute('''
       DELETE FROM checklistItem
     ''');
     dataChanged.value++;
-    Logger().i('Todos os checklistItens apagados');
+    logger.i('Todos os checklistItens apagados');
   }
 }

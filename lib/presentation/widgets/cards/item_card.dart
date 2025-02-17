@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:oficina/database/oficina_db.dart';
 import 'package:oficina/models/checklist_item.dart';
-import 'package:signals_flutter/signals_flutter.dart';
 
 class ItemCard extends StatefulWidget {
   const ItemCard({super.key, required this.checklistItem});
@@ -17,8 +16,6 @@ class _ItemCardState extends State<ItemCard> {
   @override
   void initState() {
     super.initState();
-    precisaReparo.value = widget.checklistItem.precisaReparo ? 1 : 0;
-    precisaTrocar.value = widget.checklistItem.precisaTrocar ? 1 : 0;
     OficinaDB.instance.buscarItem(widget.checklistItem.itemId).then((value) {
       setState(() {
         nomeItem = value['nome'];
@@ -27,8 +24,7 @@ class _ItemCardState extends State<ItemCard> {
   }
 
   String nomeItem = '';
-  final precisaReparo = signal(0);
-  final precisaTrocar = signal(0);
+  String observacao = '';
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +45,10 @@ class _ItemCardState extends State<ItemCard> {
                   mapa['precisaReparo'] = 1 - mapa['precisaReparo'];
                   OficinaDB.instance.atualizarChecklistItem(mapa);
                 },
-                icon: precisaReparo.watch(context) == 1
+                icon: widget.checklistItem.precisaReparo
                     ? Icons.warning
                     : Icons.warning_amber,
-                backgroundColor: precisaReparo.watch(context) == 1
+                backgroundColor: widget.checklistItem.precisaReparo
                     ? Colors.yellow
                     : Colors.grey,
               ),
@@ -62,10 +58,10 @@ class _ItemCardState extends State<ItemCard> {
                   mapa['precisaTrocar'] = 1 - mapa['precisaTrocar'];
                   OficinaDB.instance.atualizarChecklistItem(mapa);
                 },
-                icon: precisaTrocar.watch(context) == 1
+                icon: widget.checklistItem.precisaTrocar
                     ? Icons.build
                     : Icons.build_circle,
-                backgroundColor: precisaTrocar.watch(context) == 1
+                backgroundColor: widget.checklistItem.precisaTrocar
                     ? Colors.red
                     : Colors.grey,
               ),
@@ -76,13 +72,20 @@ class _ItemCardState extends State<ItemCard> {
                       builder: (context) {
                         return AlertDialog(
                           title: const Text('Observação'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                OficinaDB.instance.atualizarChecklistItem(widget.checklistItem.copyWith(observacao: observacao).toMap());
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Confirmar'),
+                            ),
+                          ],
                           content: TextField(
                             controller: TextEditingController()
                               ..text = widget.checklistItem.observacao,
                             onChanged: (value) {
-                              final mapa = widget.checklistItem.toMap();
-                              mapa['observacao'] = value;
-                              OficinaDB.instance.atualizarChecklistItem(mapa);
+                              observacao = value;
                             },
                           ),
                         );
@@ -95,15 +98,20 @@ class _ItemCardState extends State<ItemCard> {
           ),
           child: ListTile(
             title: Row(children: [
+              Text(nomeItem == ''
+                  ? ''
+                  : nomeItem[0].toUpperCase() + nomeItem.substring(1)),
+              const SizedBox(width: 8),
               widget.checklistItem.precisaReparo
                   ? const Icon(Icons.warning, color: Colors.yellow)
                   : const SizedBox(),
+              const SizedBox(width: 8),
               widget.checklistItem.precisaTrocar
                   ? const Icon(Icons.build, color: Colors.red)
                   : const SizedBox(),
-              Text(nomeItem),
             ]),
             subtitle: Text(widget.checklistItem.observacao),
+            trailing: const Icon(Icons.arrow_back),
           )),
     );
   }

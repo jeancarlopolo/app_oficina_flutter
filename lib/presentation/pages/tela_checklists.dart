@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:logger/logger.dart';
 import 'package:oficina/database/oficina_db.dart';
 import 'package:oficina/models/checklist.dart';
 import 'package:oficina/presentation/widgets/cards/checklist_card.dart';
@@ -42,7 +41,6 @@ class _TelaChecklistsState extends State<TelaChecklists> {
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         final checklist = {'placa': widget.placa, 'dataHorario': (DateTime.now().millisecondsSinceEpoch / 1000).floor()};
-        Logger().i(checklist);
         OficinaDB.instance.inserirChecklist(checklist);
       }, child: const Icon(Icons.add)),
       body: PagedListView(
